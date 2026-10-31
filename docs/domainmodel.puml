@@ -1,0 +1,11 @@
+@startuml
+'https://plantuml.com/object-diagram
+
+object London
+object Washington
+object Berlin
+object NewYork
+
+
+
+@enduml
