@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forside - Olsker Cupcakes</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #FBF7FC; font-family: 'Nunito Sans', sans-serif; color: #2A1640; }
+  a { color: inherit; }
+
+  /* Topmenu */
+  header { background: #3B1A5A; color: #FFFFFF; }
+  nav { max-width: 1200px; margin: 0 auto; padding: 16px 32px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px; }
+  .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; font-family: Fredoka, sans-serif; font-weight: 600; font-size: 22px; line-height: 1.1; }
+  .logo small { display: block; font-size: 13px; font-weight: 500; letter-spacing: 1.5px; }
+  .menu { display: flex; gap: 24px; flex: 1 1 auto; }
+  .menu a { text-decoration: none; font-weight: 600; padding: 10px 0; }
+  .menu a.aktiv { border-bottom: 2px solid #FFFFFF; font-weight: 700; }
+  .bruger { display: flex; align-items: center; gap: 20px; font-size: 15px; }
+  .saldo { background: rgba(255,255,255,0.15); padding: 6px 12px; border-radius: 999px; }
+
+  /* Velkomst */
+  .velkomst { max-width: 1200px; margin: 0 auto; padding: 64px 32px 40px; display: flex; flex-wrap: wrap; align-items: center; gap: 40px; }
+  .velkomst .tekst { flex: 1 1 380px; }
+  .velkomst .billede { flex: 1 1 520px; }
+  .velkomst img { width: 100%; display: block; border-radius: 24px; background: #FFFFFF; box-shadow: 0 10px 30px rgba(59,26,90,0.12); }
+  .lille-overskrift { margin: 0 0 12px; font-weight: 700; color: #B02A6B; text-transform: uppercase; letter-spacing: 1px; font-size: 14px; }
+  h1 { margin: 0 0 16px; font-family: Fredoka, sans-serif; font-weight: 600; font-size: 64px; line-height: 1.05; color: #3B1A5A; }
+  .velkomst p.intro { margin: 0 0 32px; font-size: 20px; line-height: 1.5; max-width: 480px; }
+  .knap { display: inline-block; background: #B02A6B; color: #FFFFFF; text-decoration: none; font-weight: 700; font-size: 20px; padding: 18px 32px; border-radius: 14px; }
+
+  /* Sådan bestiller du */
+  .trin { max-width: 1200px; margin: 0 auto; padding: 40px 32px 80px; }
+  h2 { margin: 0 0 24px; font-family: Fredoka, sans-serif; font-weight: 600; font-size: 32px; color: #3B1A5A; }
+  .kort-liste { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+  .kort { background: #FFFFFF; border: 1px solid #E6DCEC; border-radius: 18px; padding: 24px; }
+  .nummer { width: 44px; height: 44px; border-radius: 999px; background: #F1E6F6; color: #3B1A5A; display: flex; align-items: center; justify-content: center; font-family: Fredoka, sans-serif; font-size: 22px; margin-bottom: 12px; }
+  .kort h3 { margin: 0 0 6px; font-size: 20px; }
+  .kort p { margin: 0; line-height: 1.5; color: #4A3A5C; }
+
+  footer { background: #3B1A5A; color: #FFFFFF; text-align: center; padding: 24px; font-size: 14px; }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a class="logo" href="forside.html">OLSKER CUPCAKES<small>MUMS FILIBABA</small></a>
+    <div class="menu">
+      <a class="aktiv" href="forside.html">Forside</a>
+      <a href="bestil.html">Bestil</a>
+    </div>
+    <div class="bruger">
+      <span>jobe@cphbusiness.dk</span>
+      <span class="saldo">Saldo: 120 kr</span>
+      <a href="#">Kurv</a>
+      <a href="#">Log ud</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="velkomst">
+    <div class="tekst">
+      <p class="lille-overskrift">Bornholms hyggeligste bageri</p>
+      <h1>Velkommen ombord</h1>
+      <p class="intro">Øens bedste cupcakes. Sæt din egen sammen af en bund og en topping, og hent dem i butikken.</p>
+      <a class="knap" href="bestil.html">Bestil cupcakes →</a>
+    </div>
+    <div class="billede">
+      <img src="cupcakes.png" alt="Fem forskellige cupcakes">
+    </div>
+  </section>
+
+  <section class="trin">
+    <h2>Sådan bestiller du</h2>
+    <div class="kort-liste">
+      <div class="kort">
+        <div class="nummer">1</div>
+        <h3>Vælg bund og topping</h3>
+        <p>Du kan tilføje lige så mange rækker du vil, med forskellige valg.</p>
+      </div>
+      <div class="kort">
+        <div class="nummer">2</div>
+        <h3>Se prisen med det samme</h3>
+        <p>Prisen for hver bund, topping og den samlede pris står ved siden af.</p>
+      </div>
+      <div class="kort">
+        <div class="nummer">3</div>
+        <h3>Betal og hent</h3>
+        <p>Beløbet trækkes fra din saldo, og du henter dine cupcakes i butikken.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>Olsker Cupcakes · Olsker, Bornholm</footer>
+
+</body>
+</html>
