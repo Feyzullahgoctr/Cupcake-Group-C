@@ -1,10 +1,41 @@
 @startuml
 'https://plantuml.com/object-diagram
 
-object London
-object Washington
-object Berlin
-object NewYork
+hide methods
+hide circle
+
+class User {
+email
+password
+balance
+admin
+}
+
+class Orders {
+date
+status
+totalPrice
+}
+
+class Topping {
+name
+price
+}
+
+class Bottom {
+name
+price
+}
+
+class Orderline {
+amount
+unitPrice
+}
+
+User "1"-- "0..*" Orders
+Orders "1"*--"1..*" Orderline
+Orderline "0..*"--"1" Bottom
+Orderline "0..*"--"1" Topping
 
 
 
