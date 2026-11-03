@@ -1,0 +1,235 @@
+textcolor1 {
+    color: rebeccapurple;
+}
+textcolor2 {
+
+    color: deeppink;
+}
+.leftmargin{
+
+margin-left: 1.25rem;
+}
+
+
+
+.orderbutton{
+    margin: 20px;
+
+    gap: 7px;
+    font-size: 0.9rem;
+    font-weight: 600;
+
+    background-color: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+    text-decoration: none;
+    white-space: nowrap;
+
+    padding: 7px 12px;
+    color: whitesmoke;
+    background-color: deeppink;
+}
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Base font size — increase this number to scale up all rem-based sizes */
+html {
+    font-size: 24px;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: rebeccapurple;
+    color: white;
+    padding: 10px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-left,
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.brand {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    margin-right: 8px;
+}
+
+.brand-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.brand-sub {
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    opacity: 0.8;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 7px 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: background-color 0.2s ease;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* 'Forside' — transparent background, underline shows it is the active page */
+.nav-link.active {
+    background-color: transparent;
+    border-bottom: 2px solid white;
+    border-radius: 0;
+    padding-bottom: 5px;
+}
+
+
+.nav-email {
+    font-size: 0.85rem;
+    opacity: 0.9;
+}
+
+.nav-saldo {
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 7px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 8px;
+}
+
+.background{
+    background-color: lavenderblush;
+}
+
+.frontimage{
+
+    position: fixed;
+    right: 20px;
+    top: 120px;
+    transform-origin: right center;
+    width: fit-content;
+    scale: 60%;
+    padding: 14px 28px;
+    border: 3px solid rgba(255, 255, 255, 0.4);
+    border-radius: 40px;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 255, 0.4);
+}
+.infobox{
+
+    background-color: white;
+    height: 7.5rem;
+    width: 12.5rem;
+    padding: 1px 10px;
+    border-radius: 1.25rem;
+    border: 3px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 10px rgba(0, 0, 255, 0.4);
+}
+.infoboxtext{
+    line-height: 15px;
+height: 0px;
+}
+.infoboxtext2{
+    line-height: 18px;
+
+}
+.circlenumber{
+    margin-top: 0px;
+    top: 4px;
+    text-align: center;
+    height: 20px;
+    width: 20px;
+    background-color: #efe4f4;
+    padding: 6px 6px;
+    border-radius: 14px;
+}
+positionfix1{
+    display: flex;
+    gap: 20px;
+}
+.bottombar {
+
+
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: rebeccapurple;
+    color: white;
+    padding: 20px 24px;
+    margin-top: auto;
+
+}
+
+
+/* Default text */
+body {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+    color: #381956;
+}
+
+/* Large heading */
+h1 {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1.05;
+    margin: 0 0 0.25rem 0;
+}
+
+/* Hero eyebrow + description — keep them close to the heading */
+h6 {
+    margin: 1.5rem 0 2rem 0;
+}
+.hero-sub {
+    margin: 0;
+}
+
+/* Section headings */
+h2 {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+/* Card headings */
+h3 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+/* Paragraphs */
+p {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Navigation and logo */
+nav {
+    font-family: 'Nunito', sans-serif;
+}
