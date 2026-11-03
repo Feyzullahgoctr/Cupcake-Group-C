@@ -1,10 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Opret bruger - Olsker Cupcakes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
+
+<header>
+    <nav>
+        <a class="logo" href="/">OLSKER CUPCAKES<small>MUMS FILIBABA</small></a>
+        <div class="menu">
+            <a href="/">Forside</a>
+        </div>
+        <div class="bruger">
+            <a href="/login">Log ind</a>
+        </div>
+    </nav>
+</header>
+
+<main class="login-side">
+    <section class="login-kort">
+        <h1>Opret bruger</h1>
+        <p class="intro">Opret en konto, så du kan bestille og betale.</p>
+
+        <!-- Fejlbesked: vises kun hvis der er en fejl, fx at emailen allerede findes -->
+        <p class="besked fejl" th:if="${error}" th:text="${error}">Emailen findes allerede</p>
+
+        <form th:action="@{/register}" method="post">
+            <div class="felt">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" th:value="${email}" required>
+            </div>
+            <div class="felt">
+                <label for="password">Adgangskode</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="felt">
+                <label for="password2">Gentag adgangskode</label>
+                <input type="password" id="password2" name="password2" required>
+            </div>
+            <button class="knap knap-fuld" type="submit">Opret bruger</button>
+        </form>
+
+        <p class="skift">Har du allerede en konto? <a th:href="@{/login}" href="/login">Log ind her</a></p>
+    </section>
+</main>
+
+<footer>Olsker Cupcakes · Olsker, Bornholm</footer>
 
 </body>
 </html>
