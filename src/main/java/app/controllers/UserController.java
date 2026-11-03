@@ -36,7 +36,13 @@ public class UserController {
         try {
             User user = userService.login(email, password);
             ctx.sessionAttribute("user", user);
-            ctx.redirect("bestilt");
+
+            if (user.isAdmin()) {
+                ctx.redirect("admin/ordrer");
+            } else {
+                ctx.redirect("bestilt");
+            }
+
         } catch (DatabaseException | IllegalArgumentException e) {
             showLoginError(ctx, e.getMessage(), email);
         }
