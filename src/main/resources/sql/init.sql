@@ -2,7 +2,7 @@
 -- Please log an issue at https://github.com/pgadmin-org/pgadmin4/issues/new/choose if you find any bugs, including reproduction steps.
 BEGIN;
 
-DROP TABLE IF EXISTS public.bottoms CASCADE
+DROP TABLE IF EXISTS public.bottoms CASCADE;
 
 CREATE TABLE IF NOT EXISTS public.bottoms
 (
@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS public.bottoms
     CONSTRAINT bottoms_pkey PRIMARY KEY (bottom_id)
     );
 
-DROP TABLE IF EXISTS public.orderlines CASCADE
+DROP TABLE IF EXISTS public.orderlines CASCADE;
 
 CREATE TABLE IF NOT EXISTS public.orderlines
 (
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS public.orderlines
     CONSTRAINT orderlines_pkey PRIMARY KEY (orderline_id)
     );
 
-DROP TABLE IF EXISTS public.orders CASCADE
+DROP TABLE IF EXISTS public.orders CASCADE;
 
 CREATE TABLE IF NOT EXISTS public.orders
 (
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS public.orders
     CONSTRAINT orders_pkey PRIMARY KEY (order_id)
     );
 
-DROP TABLE IF EXISTS public.toppings CASCADE
+DROP TABLE IF EXISTS public.toppings CASCADE;
 
 CREATE TABLE IF NOT EXISTS public.toppings
 (
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS public.toppings
     CONSTRAINT toppings_pkey PRIMARY KEY (topping_id)
     );
 
-DROP TABLE IF EXISTS public.users CASCADE
+DROP TABLE IF EXISTS public.users CASCADE;
 
 CREATE TABLE IF NOT EXISTS public.users
 (
