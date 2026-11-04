@@ -3,9 +3,9 @@ package app;
 import app.configuration.ThymeleafConfig;
 import app.controllers.AdminController;
 import app.controllers.MainpageController;
+import app.controllers.BestilController;
 import app.controllers.UserController;
 import app.persistence.ConnectionPool;
-import app.services.UserService;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
 
@@ -29,6 +29,8 @@ public class Main {
 
             AdminController adminController = new AdminController(connectionPool);
             adminController.setRoutes(config);
+            BestilController bestilController = new BestilController(connectionPool);
+            bestilController.setRoutes(config);
 
 
         }).start(7070);

@@ -173,7 +173,7 @@ positionfix1{
 
 
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
     box-sizing: border-box;
     background-color: rebeccapurple;
@@ -232,4 +232,43 @@ p {
 /* Navigation and logo */
 nav {
     font-family: 'Nunito', sans-serif;
+}
+.saldo-dropdown {
+    position: relative;
+}
+
+.saldo-popup {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 6px;
+    min-width: 180px;
+    padding: 10px;
+    background-color: white;
+    color: #333;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    flex-direction: column;
+    gap: 8px;
+}
+
+.saldo-dropdown:hover .saldo-popup {
+    display: flex;
+}
+
+.saldo-btn {
+    padding: 8px 12px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    background-color: #f4f0fa;
+    color: #333;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.saldo-btn:hover {
+    background-color: rebeccapurple;
+    color: white;
 }

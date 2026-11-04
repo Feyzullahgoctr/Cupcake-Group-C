@@ -1,0 +1,202 @@
+.main {
+    padding: 30px 35px;
+    background-color: #fbf7fc;
+    font-family: Arial, sans-serif;
+    color: #402052;
+}
+
+.main h3 {
+    font-size: 32px;
+    margin: 0 0 12px;
+}
+
+.main > p {
+    font-size: 16px;
+    color: #65536e;
+    margin-bottom: 30px;
+}
+
+.bodyindhold {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+/* Sol taraf */
+.bodyindhold > form {
+    flex: 1;
+}
+
+.bestil {
+    background-color: white;
+    border-radius: 14px;
+    padding: 18px 26px;
+    margin-bottom: 18px;
+}
+
+.bestiltop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.bestiltop h3 {
+    font-size: 16px;
+    margin: 0;
+}
+
+
+
+.btn {
+    border: 1px solid #dec9e9;
+    border-radius: 9px;
+    padding: 8px 20px;
+    background-color: white;
+    color: #b32778;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #fbf7fc;
+}
+
+.bund,
+.topping,
+.antal {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.bestil {
+    display: grid;
+    grid-template-columns: 1fr 1fr 70px;
+    column-gap: 18px;
+}
+
+.bestiltop {
+    grid-column: 1 / -1;
+}
+
+.bestil label {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.bestil select {
+    height: 39px;
+    border: 1px solid #dec9e9;
+    border-radius: 9px;
+    padding: 0 12px;
+    background-color: white;
+    color: #493453;
+    width: 100%;
+}
+
+.bestilbtn {
+    width: 100%;
+    height: 47px;
+    border: 1px dashed #76677a;
+    border-radius: 12px;
+    background-color: white;
+    color: #402052;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Tilføj række */
+.bodyindhold > form > button {
+    width: 100%;
+    height: 47px;
+    border: 1px dashed #76677a;
+    border-radius: 12px;
+    background-color: white;
+    color: #402052;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Højre oversigt */
+.oversigt {
+    width: 280px;
+    background-color: white;
+    border-radius: 14px;
+    padding: 25px 28px;
+    box-sizing: border-box;
+}
+
+.oversigt form > p:first-child {
+    font-size: 17px;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+.oversigtdetaljeret {
+    border-bottom: 1px solid #e8d9ed;
+    padding-bottom: 13px;
+    margin-bottom: 13px;
+}
+
+.oversigtdetaljeret p {
+    font-size: 12px;
+    margin: 8px 0;
+}
+
+.oversigtdetaljeret p:first-child {
+    font-weight: bold;
+}
+
+.oversigttotal {
+    position: relative;
+    margin-top: 15px;
+}
+
+.oversigttotal p:first-child {
+    font-weight: bold;
+}
+
+.oversigttotal p {
+    font-size: 12px;
+    margin: 6px 0;
+}
+
+.oversigttotal strong {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 19px;
+}
+
+.oversigt button {
+    width: 100%;
+    height: 38px;
+    background-color: #b32778;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 12px;
+}
+
+/* Mobil */
+@media (max-width: 750px) {
+    .bodyindhold {
+        flex-direction: column;
+    }
+
+    .bodyindhold > form,
+    .oversigt {
+        width: 100%;
+    }
+
+    .bestil {
+        grid-template-columns: 1fr 1fr 60px;
+        gap: 10px;
+    }
+}

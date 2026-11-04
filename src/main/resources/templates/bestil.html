@@ -3,8 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <title>Bestil</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/bestil.css">
 </head>
-<body>
+<body class="background">
+
+<nav class="navbar">
+    <div class="nav-left">
+        <div class="brand">
+            <span class="brand-name">OLSKER CUPCAKES</span>
+            <span class="brand-sub">MUMS FILIBABA</span>
+        </div>
+        <a href="/forside" class="nav-link active">Forside</a>
+        <a href="bestil.html" class="nav-link">Bestil</a>
+    </div>
+
+    <div class="nav-right">
+        <span class="nav-email" id="email" th:text="${user!=null ? user.email : 'Guest'}">Guest</span>
+        <span class="nav-saldo">Saldo: 0 kr</span>
+        <a href="/bestil" class="nav-link">Kurv</a>
+
+        <a href="/login" class="nav-link" th:if="${user == null}">Log ind</a>
+
+
+        <a href="/logout" class="nav-link" th:if="${user !=null}">Log ud</a>
+    </div>
+</nav>
+
+<main class="main">
+    <h3>Bestil cupcakes</h3>
+    <p>Vælg en bund, en topping og hvor mange du vil have. Tilføj flere rækker, hvis du vil have forskellige slags.</p>
+
+    <div class="bodyindhold">
+        <form action="/bestilapprove" method="post">
+            <div id="bestilContainer">
+                <div class="bestil">
+                    <div class="bestiltop">
+                        <h3>Cupcake <span class="nummer">1</span></h3>
+                        <button type="button" class="btn fjern">Fjern</button>
+                    </div>
+
+                    <label class="bund">Bund:
+                        <select name="bund" required>
+                            <option value="">Vælg...</option>
+                            <option th:each="b : ${bottoms}" th:value="${b.bottom_id}" th:text="${b.name}"></option>
+                        </select>
+                    </label>
+
+                    <label class="topping">Topping:
+                        <select name="topping" required>
+                            <option value="">Vælg...</option>
+                            <option th:each="t : ${toppings}" th:value="${t.topping_id}" th:text="${t.name}"></option>
+                        </select>
+                    </label>
+
+                    <label class="antal">Antal:
+                        <select name="antal" required>
+                            <option value="">Vælg...</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="4">3</option>
+                            <option value="5">4</option>
+                            <option value="6">5</option>
+                            <option value="7">6</option>
+                            <option value="8">7</option>
+                            <option value="9">8</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+
+            <button type="button" id="addRow" class="bestilbtn">+ Tilføj en række mere</button>
+        </form>
+
+
+        <div class="oversigt">
+            <form action="">
+                <p>Oversigt</p>
+                <div class="oversigtdetaljeret">
+                    <p>2 x Chocolate + Blueberry</p>
+                    <p>Bund: Chocolate</p>
+                    <p>Topping: blueberry</p>
+                    <p>Pris pr.stok</p>
+                </div>
+                <div class="oversigtdetaljeret">
+                    <p>2 x Chocolate + Blueberry</p>
+                    <p>Bund: Chocolate</p>
+                    <p>Topping: blueberry</p>
+                    <p>Pris pr.stok</p>
+                </div>
+                <div class="oversigttotal">
+                    <p>Samlet pris</p>
+                    <p>5 cupcakes i alt</p>
+                    <strong>40 kr</strong>
+                </div>
+                <button type="button">Betal nu</button>
+            </form>
+        </div>
+
+    </div>
+
+
+</main>
+
+
+
+
+<footer class="bottombar"> Olsker Cupcakes * Olsker, Bornholm </footer>
+
+
+<script> function logbutton(){
+    if (document.getElementById("email").value !==null) {
+        document.getElementById("logbutton").href = "/logout";
+        document.getElementById("logbutton").innerHTML = "Log ud";
+    } else {
+        document.getElementById("logbutton").href = "/login";
+        document.getElementById("logbutton").innerHTML = "Log ind";
+    }
+
+}
+
+
+
+</script>
+
+<script src="/js/bestil.js"></script>
 
 </body>
 </html>

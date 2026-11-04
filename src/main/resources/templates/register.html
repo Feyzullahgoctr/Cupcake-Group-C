@@ -4,20 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Opret bruger - Olsker Cupcakes</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
 </head>
 <body>
 
 <header>
-    <nav>
-        <a class="logo" href="/">OLSKER CUPCAKES<small>MUMS FILIBABA</small></a>
-        <div class="menu">
-            <a href="/">Forside</a>
+    <nav class="navbar">
+        <div class="nav-left">
+            <div class="brand">
+                <span class="brand-name">OLSKER CUPCAKES</span>
+                <span class="brand-sub">MUMS FILIBABA</span>
+            </div>
         </div>
-        <div class="bruger">
-            <a href="/login">Log ind</a>
+        <div class="nav-right">
+            <a href="/" class="nav-link">Forside</a>
         </div>
+
     </nav>
 </header>
 
@@ -49,7 +53,7 @@
     </section>
 </main>
 
-<footer>Olsker Cupcakes · Olsker, Bornholm</footer>
+<footer class="bottombar">Olsker Cupcakes · Olsker, Bornholm</footer>
 
 </body>
 </html>

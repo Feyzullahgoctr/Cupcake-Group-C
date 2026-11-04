@@ -26,12 +26,28 @@
             <span class="brand-sub">MUMS FILIBABA</span>
         </div>
         <a href="/forside" class="nav-link active">Forside</a>
-        <a href="bestil.html" class="nav-link">Bestil</a>
+        <a href="/bestil" class="nav-link">Bestil</a>
     </div>
 
     <div class="nav-right">
+
         <span class="nav-email" id="email" th:text="${user!=null ? user.email : 'Guest'}">Guest</span>
-        <span class="nav-saldo" th:if="${user != null}">Saldo: 0 kr</span>
+
+        <div class="saldo-dropdown" th:if="${user != null}">
+
+            <span class="nav-saldo">Saldo: <span th:text="${user.balance}">0</span> kr</span>
+            <div class="saldo-popup">
+                <form action="/updateBalance" method="POST">
+                <button type="submit" class="saldo-btn" value="50" name="updateBalanceForm">Tilføj 50 kr</button>
+                <button type="submit" class="saldo-btn" value="100" name="updateBalanceForm">Tilføj 100 kr</button>
+                <button type="submit" class="saldo-btn" value="250" name="updateBalanceForm" >Tilføj 250 kr</button>
+                <button type="submit" class="saldo-btn" value="0" name="updateBalanceForm">Fjern alle penge</button>
+                </form>
+            </div>
+        </div>
+
+
+        <a href="/admin" class="nav-link" id="admin" th:if="${user != null && user.isAdmin()}">Admin</a>
 
         <a href="/bestil" class="nav-link" th:if="${user != null}">Kurv</a>
 
@@ -126,7 +142,7 @@
     </div>
 
 </positionfix1>
-<footer class="bottombar"> Olsker Cupcakes * Olsker, Bornholm </footer>
+<footer class="bottombar" style= "text-align: center"> Olsker Cupcakes · Olsker, Bornholm </footer>
 
 
 </body>
