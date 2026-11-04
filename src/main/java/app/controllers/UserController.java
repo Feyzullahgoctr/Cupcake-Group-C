@@ -99,10 +99,12 @@ public class UserController {
         String amountStr = ctx.formParam("updateBalanceForm");
         double amount = Double.parseDouble(amountStr);
         try {
-        userService.updateUserBalance(user.getEmail(), amount);
+
         if (amount == 0) {
+            userService.updateUserBalance(user.getEmail(), (user.getBalance()*-1));
             user.setBalance(0);
         } else {
+            userService.updateUserBalance(user.getEmail(), amount);
             user.setBalance(user.getBalance() + amount);
         }
         ctx.sessionAttribute("user", user);
