@@ -50,7 +50,7 @@ public class UserController {
             ctx.sessionAttribute("user", user);
 
             if (user.isAdmin()) {
-                ctx.redirect("admin/ordrer");
+                ctx.redirect("admin/kunder");
             } else {
                 ctx.redirect("/");
             }

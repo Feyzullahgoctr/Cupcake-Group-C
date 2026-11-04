@@ -1,4 +1,108 @@
 package app.persistence;
 
+import app.entities.Order;
+import app.entities.Status;
+import app.entities.User;
+import app.exceptions.DatabaseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 public class AdminMapper {
+
+    ConnectionPool connectionPool;
+    private static final Logger logger =
+            LoggerFactory.getLogger(AdminMapper.class);
+
+    public AdminMapper(ConnectionPool connectionPool){
+        this.connectionPool = connectionPool;
+    }
+
+
+    public List<User> getAllCostumers() throws DatabaseException {
+        List<User> customers = new ArrayList<>();
+        String query = "SELECT user_id, email, password, admin, balance FROM users WHERE admin = false ORDER BY user_id";
+
+        try(Connection conn = connectionPool.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()){
+                int userId = rs.getInt("user_id");
+                String email = rs.getString("email");
+                String password = rs.getString("password");
+                boolean isAdmin = rs.getBoolean("admin");
+                double balance = rs.getDouble("balance");
+
+                customers.add(new User(userId, email, password, isAdmin, balance));
+            }
+        } catch (SQLException e){
+            logger.error("Fejl ved hentning af kunder", e);
+            throw new DatabaseException("Kunne ikke hente kunder", e.getMessage());
+        }
+
+        return customers;
+
+    }
+
+
+    public User getUserById(int userId) throws DatabaseException {
+        String query = "SELECT user_id, email, password, admin, balance FROM users WHERE user_id = ?";
+
+        try (Connection conn = connectionPool.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, userId);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (!rs.next()) {
+                    return null;
+                }
+                String email = rs.getString("email");
+                String password = rs.getString("password");
+                boolean isAdmin = rs.getBoolean("admin");
+                double balance = rs.getDouble("balance");
+
+                return new User(userId, email, password, isAdmin, balance);
+            }
+        } catch (SQLException e){
+            logger.error("Fejl ved hentning af kunde: {}",userId);
+            throw new DatabaseException("Kunne ikke hente kunden", e.getMessage());
+        }
+    }
+
+    public List<Order> getOrdersByUserId(int userId) throws DatabaseException {
+        List<Order> orders = new ArrayList<>();
+        String query = "SELECT order_id, user_id, create_date, status, total_price FROM orders WHERE user_id = ? ORDER BY create_date DESC";
+
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement ps = connection.prepareStatement(query)) {
+
+            ps.setInt(1, userId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    int orderId = rs.getInt("order_id");
+                    LocalDateTime orderDate = rs.getTimestamp("create_date").toLocalDateTime();
+                    Status status = Status.valueOf(rs.getString("status"));
+                    double totalPrice = rs.getDouble("total_price");
+
+                    orders.add(new Order(orderId, userId, orderDate, status, totalPrice));
+                }
+            }
+
+        } catch (SQLException e) {
+            logger.error("Fejl ved hentning af ordrer for kunde: {}", userId, e);
+            throw new DatabaseException("Kunne ikke hente ordrer", e.getMessage());
+        }
+        return orders;
+    }
+
+
 }

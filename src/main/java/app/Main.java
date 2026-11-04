@@ -1,6 +1,8 @@
 package app;
 
 import app.configuration.ThymeleafConfig;
+import app.controllers.AdminController;
+import app.controllers.MainpageController;
 import app.controllers.BestilController;
 import app.controllers.UserController;
 import app.persistence.ConnectionPool;
@@ -25,6 +27,8 @@ public class Main {
             UserController userController = new UserController(connectionPool);
             userController.setRoutes(config);
 
+            AdminController adminController = new AdminController(connectionPool);
+            adminController.setRoutes(config);
             BestilController bestilController = new BestilController(connectionPool);
             bestilController.setRoutes(config);
 
