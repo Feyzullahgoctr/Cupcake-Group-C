@@ -24,6 +24,8 @@ public class UserController {
     public void setRoutes(JavalinConfig app) {
         app.routes.get("/login", ctx -> showLogin(ctx));
         app.routes.post("/login", ctx -> login(ctx));
+        app.routes.get("/logout", ctx -> logout(ctx));
+
 
         app.routes.get("/register", ctx -> ctx.render("register"));
         app.routes.post("/register", ctx -> register(ctx));
@@ -34,6 +36,8 @@ public class UserController {
             model.put("user", user);
             ctx.render("/index.html", model);
         });
+
+
 
         app.routes.get("/bestil", ctx -> ctx.render("/bestil.html"));
 
@@ -50,13 +54,17 @@ public class UserController {
             if (user.isAdmin()) {
                 ctx.redirect("admin/ordrer");
             } else {
-                ctx.redirect("bestilt");
+                ctx.redirect("/");
             }
 
         } catch (DatabaseException | IllegalArgumentException e) {
             showLoginError(ctx, e.getMessage(), email);
         }
 
+    }
+    private void logout(Context ctx) {
+        ctx.sessionAttribute("user", null);
+        ctx.redirect("/");
     }
 
     private void showLogin(@NotNull Context ctx) {
