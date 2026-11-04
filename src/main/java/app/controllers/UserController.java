@@ -39,8 +39,6 @@ public class UserController {
 
 
 
-        app.routes.get("/bestil", ctx -> ctx.render("/bestil.html"));
-
     }
 
     private void login(@NotNull Context ctx) {
