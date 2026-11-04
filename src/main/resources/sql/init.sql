@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS public.bottoms
     bottom_name character varying COLLATE pg_catalog."default" NOT NULL,
     price integer NOT NULL,
     CONSTRAINT bottoms_pkey PRIMARY KEY (bottom_id)
-    );
+);
 
 DROP TABLE IF EXISTS public.orderlines CASCADE;
 
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS public.orderlines
     amount integer NOT NULL,
     price integer NOT NULL,
     CONSTRAINT orderlines_pkey PRIMARY KEY (orderline_id)
-    );
+);
 
 DROP TABLE IF EXISTS public.orders CASCADE;
 
@@ -33,9 +33,9 @@ CREATE TABLE IF NOT EXISTS public.orders
     user_id integer NOT NULL,
     create_date timestamp without time zone NOT NULL DEFAULT now(),
     total_price integer NOT NULL,
-    status character varying COLLATE pg_catalog."default" NOT NULL DEFAULT 'bestilt'::character varying,
+    status character varying COLLATE pg_catalog."default" NOT NULL DEFAULT 'unpaid'::character varying,
     CONSTRAINT orders_pkey PRIMARY KEY (order_id)
-    );
+);
 
 DROP TABLE IF EXISTS public.toppings CASCADE;
 
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS public.toppings
     topping_name character varying COLLATE pg_catalog."default" NOT NULL,
     price integer NOT NULL,
     CONSTRAINT toppings_pkey PRIMARY KEY (topping_id)
-    );
+);
 
 DROP TABLE IF EXISTS public.users CASCADE;
 
@@ -58,36 +58,36 @@ CREATE TABLE IF NOT EXISTS public.users
     balance integer NOT NULL DEFAULT 0,
     CONSTRAINT users_pkey PRIMARY KEY (user_id),
     CONSTRAINT users_email_key UNIQUE (email)
-    );
+);
 
 
 
 ALTER TABLE IF EXISTS public.orderlines
     ADD CONSTRAINT orderlines_bottom_id_fkey FOREIGN KEY (bottom_id)
-    REFERENCES public.bottoms (bottom_id) MATCH SIMPLE
-    ON UPDATE NO ACTION
-       ON DELETE NO ACTION;
+        REFERENCES public.bottoms (bottom_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION;
 
 
 ALTER TABLE IF EXISTS public.orderlines
     ADD CONSTRAINT orderlines_order_id_fkey FOREIGN KEY (order_id)
-    REFERENCES public.orders (order_id) MATCH SIMPLE
-    ON UPDATE NO ACTION
-       ON DELETE CASCADE;
+        REFERENCES public.orders (order_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE;
 
 
 ALTER TABLE IF EXISTS public.orderlines
     ADD CONSTRAINT orderlines_topping_id_fkey FOREIGN KEY (topping_id)
-    REFERENCES public.toppings (topping_id) MATCH SIMPLE
-    ON UPDATE NO ACTION
-       ON DELETE NO ACTION;
+        REFERENCES public.toppings (topping_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION;
 
 
 ALTER TABLE IF EXISTS public.orders
     ADD CONSTRAINT orders_user_id_fkey FOREIGN KEY (user_id)
-    REFERENCES public.users (user_id) MATCH SIMPLE
-    ON UPDATE NO ACTION
-       ON DELETE NO ACTION;
+        REFERENCES public.users (user_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION;
 
 
 -- Bunde (priser fra opgaven)
@@ -119,7 +119,7 @@ INSERT INTO public.users (email, password, admin, balance) VALUES
 -- En testordre til kunde1 (user_id 2):
 -- 2 stk. Chocolate + Blueberry (10 kr pr. stk) og 3 stk. Pistacio + Strawberry (12 kr pr. stk)
 INSERT INTO public.orders (user_id, total_price, status) VALUES
-    (2, 56, 'betalt');
+    (2, 56, 'Paid');
 
 INSERT INTO public.orderlines (order_id, bottom_id, topping_id, amount, price) VALUES
                                                                                    (1, 1, 2, 2, 20),

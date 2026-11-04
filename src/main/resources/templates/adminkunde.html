@@ -1,12 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Kunder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/admin.css">
 </head>
 <body>
 
+<header>
+    <nav>
+        <a class="logo" href="/admin/kunder">OLSKER CUPCAKES<small>ADMIN</small></a>
+        <div class="menu">
+            <a href="/admin/ordrer">Ordrer</a>
+            <a class="aktiv" href="/admin/kunder">Kunder</a>
+        </div>
+        <div class="bruger">
+            <span th:text="${user.email}">admin@olsker.dk</span>
+            <a href="/logout">Log ud</a>
+        </div>
+    </nav>
+</header>
 
+<main>
+    <h1>Kunder</h1>
+    <p class="intro">Alle kunder i systemet. Klik på en kunde for at se oplysninger og ordrer.</p>
+
+    <table class="tabel">
+        <thead>
+        <tr>
+            <th>Kunde nr.</th>
+            <th>Email</th>
+            <th>Saldo</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- én række for hver kunde i listen "customers" -->
+        <tr th:each="customer : ${customers}">
+            <td th:text="${customer.user_id}">2</td>
+            <td th:text="${customer.email}">kunde1@test.dk</td>
+            <td th:text="${#numbers.formatInteger(customer.balance, 1)} + ' kr'">200 kr</td>
+            <td class="hoejre">
+                <a class="lille-knap" th:href="@{/admin/kunder/{id}(id=${customer.user_id})}">Se kunde</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+<footer>Olsker Cupcakes · Olsker, Bornholm</footer>
 
 </body>
 </html>

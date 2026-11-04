@@ -1,0 +1,278 @@
+/* =====================================================
+   Admin-sider (adminkunde.html og kundedetaljer.html)
+   Samme design som vores admin-design. Filen bruges KUN af admin-siderne.
+   Ligger i: src/main/resources/public/css/admin.css
+   ===================================================== */
+
+/* =====================================================
+   1. FARVER
+   Vi gemmer farverne ét sted som "variabler".
+   Så skal vi kun rette farven her, hvis vi vil ændre den.
+   Man bruger dem sådan: color: var(--lilla);
+   ===================================================== */
+:root {
+    --lilla: #3B1A5A;        /* topmenu, bund og overskrifter */
+    --pink: #B02A6B;         /* knapper og links */
+    --baggrund: #FBF7FC;     /* baggrund på hele siden */
+    --hvid: #FFFFFF;         /* kort og felter */
+    --tekst: #2A1640;        /* almindelig tekst */
+    --graa-tekst: #4A3A5C;   /* mindre vigtig tekst */
+    --kant: #E6DCEC;         /* kant rundt om kort */
+    --lys-lilla: #F1E6F6;    /* cirklen med tal på forsiden */
+    --rod: #8A1F3D;          /* fejlbeskeder og "Fjern"-knap */
+    --gron: #1E6B34;         /* "det gik godt"-beskeder */
+}
+
+
+/* =====================================================
+   2. GENERELT
+   ===================================================== */
+body {
+    margin: 0;
+    background: var(--baggrund);
+    font-family: 'Nunito Sans', sans-serif;
+    color: var(--tekst);
+}
+
+a {
+    color: inherit; /* links får samme farve som teksten omkring dem */
+}
+
+h1 {
+    margin: 0 0 8px;
+    font-family: Fredoka, sans-serif;
+    font-weight: 600;
+    font-size: 48px;
+    color: var(--lilla);
+}
+
+h2 {
+    margin: 0 0 16px;
+    font-family: Fredoka, sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--lilla);
+}
+
+/* Indholdet på siden. max-width gør at teksten ikke bliver alt for bred */
+main {
+    max-width: 1200px;
+    margin: 0 auto; /* "auto" centrerer indholdet */
+    padding: 48px 32px 80px;
+}
+
+/* Lille forklarende tekst under en overskrift */
+.intro {
+    margin: 0 0 32px;
+    font-size: 18px;
+    color: var(--graa-tekst);
+}
+
+/* =====================================================
+   4. TOPMENU OG BUND
+   ===================================================== */
+header {
+    background: var(--lilla);
+    color: var(--hvid);
+}
+
+/* flex lægger logo, menu og bruger ved siden af hinanden */
+nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px 32px;
+    display: flex;
+    flex-wrap: wrap;      /* går ned på en ny linje på små skærme */
+    align-items: center;
+    gap: 16px 32px;       /* afstand mellem tingene */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: Fredoka, sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.1;
+    text-decoration: none;
+}
+
+.logo small {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+}
+
+.menu {
+    display: flex;
+    flex: 1;  /* menuen fylder pladsen i midten, så brugeren skubbes til højre */
+    gap: 24px;
+}
+
+.menu a {
+    padding: 10px 0;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* Den side man er på lige nu får en streg under */
+.menu a.aktiv {
+    border-bottom: 2px solid var(--hvid);
+    font-weight: 700;
+}
+
+/* Email, saldo, kurv og log ud i højre side */
+.bruger {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 15px;
+}
+
+footer {
+    background: var(--lilla);
+    color: var(--hvid);
+    text-align: center;
+    padding: 24px;
+    font-size: 14px;
+}
+
+.saldo-indhold {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 32px;
+}
+
+.saldo-kort {
+    flex: 1 1 320px;
+    background: var(--hvid);
+    border: 1px solid var(--kant);
+    border-radius: 18px;
+    padding: 24px;
+}
+
+/* =====================================================
+   10. ADMIN-SIDER (admin-kunder.html og admin-kunde.html)
+   ===================================================== */
+
+/* Tabel med hvid baggrund og afrundede hjørner */
+.tabel {
+    width: 100%;
+    border-collapse: collapse; /* ingen dobbelte streger mellem cellerne */
+    background: var(--hvid);
+    border: 1px solid var(--kant);
+    border-radius: 18px;
+    overflow: hidden;          /* gør at hjørnerne bliver runde */
+}
+
+.tabel th {
+    background: var(--lys-lilla);
+    color: var(--lilla);
+    font-size: 14px;
+    text-align: left;
+    padding: 14px 20px;
+}
+
+.tabel td {
+    padding: 14px 20px;
+    border-top: 1px solid var(--kant);
+    vertical-align: top;
+}
+
+/* Tekst i højre side af cellen, fx priser og knapper */
+.tabel .hoejre {
+    text-align: right;
+}
+
+/* Lille knap i en tabel, fx "Se kunde" */
+.lille-knap {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 10px;
+    background: var(--pink);
+    color: var(--hvid);
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+/* Lille grøn "pille" med ordrens status */
+.status {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: #E6F4EA;
+    color: var(--gron);
+    font-weight: 700;
+    font-size: 13px;
+}
+
+/* Lidt mere luft under overskriften på kundens side */
+.tilbage + h1 {
+    margin-bottom: 24px;
+}
+
+/* Link tilbage til kundeoversigten */
+.tilbage {
+    display: inline-block;
+    margin-bottom: 16px;
+    color: var(--pink);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+/* Kundens oplysninger: tekst til venstre og værdi til højre */
+.info-linje {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #EFE6F3;
+}
+
+.info-linje span:first-child {
+    color: var(--graa-tekst);
+}
+
+.info-linje span:last-child {
+    font-weight: 700;
+}
+
+/* Oplysninger er smal, ordrer er bred */
+.saldo-kort.info {
+    flex: 1 1 280px;
+}
+
+.saldo-kort.ordrer {
+    flex: 3 1 560px;
+}
+
+/* Tabellen inde i et kort skal ikke have sin egen kant */
+.saldo-kort .tabel {
+    border: none;
+}
+
+/* Farver på status. Navnene passer med jeres enum Status { Paid, unpaid, Cancel } */
+.status.unpaid {
+    background: #FFF4D6;   /* gul: mangler at blive betalt */
+    color: #7A5300;
+}
+
+.status.Cancel {
+    background: #FBE9EE;   /* rød: annulleret */
+    color: var(--rod);
+}
+
+/* Footeren skal altid stå i bunden, også når siden er kort */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+    width: 100%;
+    box-sizing: border-box;
+}

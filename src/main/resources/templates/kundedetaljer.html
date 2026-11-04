@@ -1,10 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Kunde Detaljer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/admin.css">
 </head>
 <body>
+
+<header>
+    <nav>
+        <a class="logo" href="/admin/kunder">OLSKER CUPCAKES<small>ADMIN</small></a>
+        <div class="menu">
+            <a href="/admin/ordrer">Ordrer</a>
+            <a class="aktiv" href="/admin/kunder">Kunder</a>
+        </div>
+        <div class="bruger">
+            <span th:text="${user.email}">admin@olsker.dk</span>
+            <a href="/logout">Log ud</a>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <a class="tilbage" href="/admin/kunder">← Tilbage til alle kunder</a>
+    <h1 th:text="${customer.email}">kunde1@test.dk</h1>
+
+    <div class="saldo-indhold">
+
+        <!-- AC 2: kundens oplysninger -->
+        <section class="saldo-kort info">
+            <h2>Oplysninger</h2>
+            <div class="info-linje"><span>Kunde nr.</span><span th:text="${customer.user_id}">2</span></div>
+            <div class="info-linje"><span>Email</span><span th:text="${customer.email}">kunde1@test.dk</span></div>
+            <div class="info-linje"><span>Saldo</span><span th:text="${#numbers.formatInteger(customer.balance, 1)} + ' kr'">200 kr</span></div>
+            <div class="info-linje"><span>Antal ordrer</span><span th:text="${orders.size()}">1</span></div>
+        </section>
+
+        <!-- AC 3: kundens ordrer -->
+        <section class="saldo-kort ordrer">
+            <h2>Ordrer</h2>
+
+            <p class="intro" th:if="${orders.isEmpty()}">Kunden har ingen ordrer.</p>
+
+            <table class="tabel" th:unless="${orders.isEmpty()}">
+                <thead>
+                <tr>
+                    <th>Ordre nr.</th>
+                    <th>Dato</th>
+                    <th>Status</th>
+                    <th class="hoejre">Pris</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="order : ${orders}">
+                    <td th:text="${order.order_id}">1</td>
+                    <td th:text="${#temporals.format(order.orderDate, 'dd-MM-yyyy')}">03-11-2026</td>
+                    <!-- status bliver også en class, så farven passer: Paid, unpaid eller Cancel -->
+                    <td><span th:class="'status ' + ${order.status}" th:text="${order.status}">Paid</span></td>
+                    <td class="hoejre" th:text="${#numbers.formatInteger(order.totalPrice, 1)} + ' kr'">56 kr</td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+
+    </div>
+</main>
+
+<footer>Olsker Cupcakes · Olsker, Bornholm</footer>
 
 </body>
 </html>
