@@ -134,14 +134,10 @@ main {
 /* =====================================================
    4. TOPMENU OG BUND
    ===================================================== */
-header {
-    background: var(--lilla);
-    color: var(--hvid);
-}
 
 /* flex lægger logo, menu og bruger ved siden af hinanden */
 nav {
-    max-width: 1200px;
+    max-width: stretch;
     margin: 0 auto;
     padding: 16px 32px;
     display: flex;
@@ -199,13 +195,7 @@ nav {
     border-radius: 999px;                  /* helt runde ender */
 }
 
-footer {
-    background: var(--lilla);
-    color: var(--hvid);
-    text-align: center;
-    padding: 24px;
-    font-size: 14px;
-}
+
 
 
 /* =====================================================

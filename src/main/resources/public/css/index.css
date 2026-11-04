@@ -173,7 +173,7 @@ positionfix1{
 
 
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
     box-sizing: border-box;
     background-color: rebeccapurple;
