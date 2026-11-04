@@ -1,14 +1,12 @@
 package app.persistence;
 
-import app.entities.Bottom;
-import app.entities.Status;
-import app.entities.Topping;
+import app.dto.OrderlineDTO;
+import app.entities.*;
 import app.exceptions.DatabaseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -118,5 +116,123 @@ public class BestilMapper {
             throw new DatabaseException("Could not create orderline in the database");
         }
     }
+
+
+    public void updateOrderPrice(int order_id , double total_price) throws DatabaseException
+    {
+        String sql = "update orders set total_price = ?  where order_id = ?";
+        try (Connection connection = connectionPool.getConnection())
+        {
+            try (PreparedStatement prepareStatement = connection.prepareStatement(sql))
+            {
+                prepareStatement.setDouble(1, total_price);
+                prepareStatement.setInt(2, order_id);
+
+                prepareStatement.executeUpdate();
+
+            }
+        }
+        catch (SQLException e)
+        {
+            logger.error(e.getMessage(), e);
+            throw new DatabaseException("Kunne ikke opdater total price i order");
+        }
+    }
+
+
+    public List<Orderline> getOrderline() throws DatabaseException {
+        String query = "select * from orderlines";
+        List<Orderline> orderlines = new ArrayList<>();
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement stm = connection.prepareStatement(query)) {
+            try (ResultSet rs = stm.executeQuery()) {
+                while (rs.next()) {
+                    int orderline_id = rs.getInt("orderline_id");
+                    int order_id = rs.getInt("order_id");
+                    int bottom_id = rs.getInt("bottom_id");
+                    int topping_id = rs.getInt("topping_id");
+                    int amount = rs.getInt("amount");
+                    double price = rs.getDouble("price");
+
+                    orderlines.add(new Orderline(orderline_id,order_id,bottom_id,topping_id,amount,price));
+                }
+            }
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
+            throw new DatabaseException("Dette orderlines findes ikke.");
+        }
+        return orderlines;
+    }
+
+
+    public void deleteOrderlines(int order_id) throws DatabaseException
+    {
+        String sql = "delete from orderlines WHERE order_id = ?";
+        try (Connection connection = connectionPool.getConnection())
+        {
+            try (PreparedStatement prepareStatement = connection.prepareStatement(sql))
+            {
+                prepareStatement.setInt(1, order_id);
+
+                prepareStatement.executeUpdate();
+
+            }
+        }
+        catch (SQLException e)
+        {
+            logger.error(e.getMessage(), e);
+            throw new DatabaseException("Kunne ikke slette order");
+        }
+    }
+
+
+    public List<OrderlineDTO> getOrderlineByOrderid(int order_id)
+            throws DatabaseException {
+
+        String query = """
+            
+                SELECT ol.orderline_id,
+                   b.bottom_id,
+                   t.topping_id,
+                   ol.amount,
+                   ol.price,
+                   b.bottom_name,
+                   t.topping_name
+            FROM orderlines ol
+                     JOIN bottoms b ON ol.bottom_id = b.bottom_id
+                     JOIN toppings t ON ol.topping_id = t.topping_id
+            WHERE ol.order_id = ?
+            """;
+
+        List<OrderlineDTO> orderlines = new ArrayList<>();
+
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement stm = connection.prepareStatement(query)) {
+
+            stm.setInt(1, order_id);
+
+            try (ResultSet rs = stm.executeQuery()) {
+                while (rs.next()) {
+
+                    orderlines.add(new OrderlineDTO(
+                            rs.getInt("orderline_id"),
+                            rs.getInt("bottom_id"),
+                            rs.getInt("topping_id"),
+                            rs.getInt("amount"),
+                            rs.getDouble("price"),
+                            rs.getString("bottom_name"),
+                            rs.getString("topping_name")
+                    ));
+                }
+            }
+
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
+            throw new DatabaseException("Kunne ikke hente orderlines.");
+        }
+
+        return orderlines;
+    }
+
 
 }

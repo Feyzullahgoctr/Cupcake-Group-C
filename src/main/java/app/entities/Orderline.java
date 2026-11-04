@@ -3,16 +3,16 @@ package app.entities;
 public class Orderline {
     private int orderLine_id;
     private int order_id;
-    private Bottom bottoms;
-    private Topping toppings;
+    private int bottom_id;
+    private int topping_id;
     private int amount;
     private double unitPrice;
 
-    public Orderline(int orderLine_id, int order_id, Bottom bottoms, Topping toppings, int amount, double unitPrice) {
+    public Orderline(int orderLine_id, int order_id, int bottom_id, int topping_id, int amount, double unitPrice) {
         this.orderLine_id = orderLine_id;
         this.order_id = order_id;
-        this.bottoms = bottoms;
-        this.toppings = toppings;
+        this.bottom_id = bottom_id;
+        this.topping_id = topping_id;
         this.amount = amount;
         this.unitPrice = unitPrice;
     }
@@ -23,14 +23,6 @@ public class Orderline {
 
     public int getOrder_id() {
         return order_id;
-    }
-
-    public Bottom getBottoms() {
-        return bottoms;
-    }
-
-    public Topping getToppings() {
-        return toppings;
     }
 
     public int getAmount() {
@@ -49,19 +41,19 @@ public class Orderline {
         this.order_id = order_id;
     }
 
-    public void setBottoms(Bottom bottoms) {
-        this.bottoms = bottoms;
-    }
-
-    public void setToppings(Topping toppings) {
-        this.toppings = toppings;
-    }
-
     public void setAmount(int amount) {
         this.amount = amount;
     }
 
     public void setUnitPrice(double unitPrice) {
         this.unitPrice = unitPrice;
+    }
+
+    public int getBottom_id() {
+        return bottom_id;
+    }
+
+    public int getTopping_id() {
+        return topping_id;
     }
 }
