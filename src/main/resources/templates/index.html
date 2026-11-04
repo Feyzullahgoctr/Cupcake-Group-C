@@ -15,20 +15,7 @@
     <link rel="stylesheet" href="/css/index.css">
 
 </head>
-<script> function logbutton(){
-    if (document.getElementById("email").value !==null) {
-        document.getElementById("logbutton").href = "/logout";
-        document.getElementById("logbutton").innerHTML = "Log ud";
-    } else {
-        document.getElementById("logbutton").href = "/login";
-        document.getElementById("logbutton").innerHTML = "Log ind";
-    }
 
-}
-
-
-
-</script>
 
 <body class="background">
 
@@ -44,8 +31,9 @@
 
     <div class="nav-right">
         <span class="nav-email" id="email" th:text="${user!=null ? user.email : 'Guest'}">Guest</span>
-        <span class="nav-saldo">Saldo: 0 kr</span>
-        <a href="/bestil" class="nav-link">Kurv</a>
+        <span class="nav-saldo" th:if="${user != null}">Saldo: 0 kr</span>
+
+        <a href="/bestil" class="nav-link" th:if="${user != null}">Kurv</a>
 
         <a href="/login" class="nav-link" th:if="${user == null}">Log ind</a>
 
