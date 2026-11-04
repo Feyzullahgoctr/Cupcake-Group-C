@@ -106,6 +106,7 @@ main {
    ===================================================== */
 
 /* Pink knap. Kan bruges både på <a> og <button> */
+
 .knap {
     display: inline-block;
     background: var(--pink);

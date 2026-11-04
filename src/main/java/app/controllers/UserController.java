@@ -25,7 +25,7 @@ public class UserController {
         app.routes.get("/login", ctx -> showLogin(ctx));
         app.routes.post("/login", ctx -> login(ctx));
         app.routes.get("/logout", ctx -> logout(ctx));
-
+        app.routes.post("/updateBalance", ctx -> updateBalance(ctx));
 
         app.routes.get("/register", ctx -> ctx.render("register"));
         app.routes.post("/register", ctx -> register(ctx));
@@ -34,7 +34,7 @@ public class UserController {
             Map<String, Object> model = new HashMap<>();
             User user = ctx.sessionAttribute("user");
             model.put("user", user);
-            ctx.render("/index.html", model);
+            ctx.render("/index", model);
         });
 
 
@@ -93,5 +93,24 @@ public class UserController {
             model.put("email", email);
             ctx.render("register.html", model);
         }
+    }
+    private void updateBalance(Context ctx) {
+        User user = ctx.sessionAttribute("user");
+        String amountStr = ctx.formParam("updateBalanceForm");
+        double amount = Double.parseDouble(amountStr);
+        try {
+        userService.updateUserBalance(user.getEmail(), amount);
+        if (amount == 0) {
+            user.setBalance(0);
+        } else {
+            user.setBalance(user.getBalance() + amount);
+        }
+        ctx.sessionAttribute("user", user);
+        ctx.redirect("/");
+        } catch (DatabaseException e) {
+            showLoginError(ctx, e.getMessage(), user.getEmail());
+        }
+
+
     }
 }

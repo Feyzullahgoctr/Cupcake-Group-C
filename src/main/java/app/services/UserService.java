@@ -4,7 +4,6 @@ import app.entities.User;
 import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
 import app.persistence.UserMapper;
-import io.javalin.Javalin;
 
 public class UserService {
    private ConnectionPool connectionPool;
@@ -36,5 +35,12 @@ public class UserService {
             throw new IllegalArgumentException("De to adgangskoder er ikke ens");
         }
         userMapper.createUser(email, password);
+    }
+
+    public void updateUserBalance(String email, double amount) throws DatabaseException {
+        userMapper.updateUserBalance(email, amount);
+    }
+    public void getUserBalanceByEmail(String email) throws DatabaseException {
+        userMapper.getUserBalanceByEmail(email);
     }
 }
