@@ -29,6 +29,7 @@ public class Main {
 
             AdminController adminController = new AdminController(connectionPool);
             adminController.setRoutes(config);
+
             BestilController bestilController = new BestilController(connectionPool);
             bestilController.setRoutes(config);
 

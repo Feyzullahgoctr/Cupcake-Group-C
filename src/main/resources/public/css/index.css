@@ -36,11 +36,12 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 /* Base font size — increase this number to scale up all rem-based sizes */
 html {
-    font-size: 24px;
+    font-size: 16px;
 }
 
 .navbar {
@@ -125,7 +126,7 @@ html {
 
 .frontimage{
 
-    position: fixed;
+    position: absolute;
     right: 20px;
     top: 120px;
     transform-origin: right center;
@@ -271,4 +272,146 @@ nav {
 .saldo-btn:hover {
     background-color: rebeccapurple;
     color: white;
+}
+
+
+
+/* =====================================================
+   Forside (index.html)
+   Ligger i: src/main/resources/public/css/forside.css
+   Menu, bund og farver kommer stadig fra index.css
+   ===================================================== */
+
+/* Indholdet står i midten og bliver ikke for bredt */
+.forside {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 56px 32px 80px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* ---------- Toppen (hero) ---------- */
+
+/* Tekst og billede ved siden af hinanden */
+.hero {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    margin-bottom: 80px;
+}
+
+.hero-tekst {
+    flex: 1;
+}
+
+/* Lille pink tekst over overskriften */
+.lille-overskrift {
+    margin: 0 0 12px;
+    color: deeppink;
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.hero h1 {
+    color: rebeccapurple;
+    margin-bottom: 16px;
+}
+
+.hero-intro {
+    max-width: 460px;
+    margin: 0 0 32px;
+    font-size: 1.15rem;
+    line-height: 1.6;
+}
+
+/* Den store pink knap */
+.stor-knap {
+    display: inline-block;
+    padding: 14px 28px;
+    background-color: deeppink;
+    color: white;
+    font-weight: 700;
+    font-size: 1.05rem;
+    text-decoration: none;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(255, 20, 147, 0.3);
+    transition: transform 0.15s ease;
+}
+
+/* Knappen hopper lidt op, når musen er over den */
+.stor-knap:hover {
+    transform: translateY(-2px);
+}
+
+/* Hvid boks rundt om billedet */
+.hero-billede {
+    flex: 1;
+    background-color: white;
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 10px 30px rgba(102, 51, 153, 0.15);
+}
+
+.hero-billede img {
+    width: 100%;   /* billedet bliver lige så bredt som boksen */
+    display: block;
+}
+
+/* ---------- Sådan bestiller du ---------- */
+
+.forside h2 {
+    color: rebeccapurple;
+    margin: 0 0 24px;
+}
+
+/* grid lægger de fire kort ved siden af hinanden */
+.trin-liste {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.trin-kort {
+    background-color: white;
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 6px 18px rgba(102, 51, 153, 0.1);
+}
+
+/* Den runde cirkel med tallet */
+.trin-nummer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #efe4f4;
+    color: rebeccapurple;
+    font-weight: 800;
+}
+
+.trin-kort h3 {
+    margin: 16px 0 8px;
+    font-size: 1.05rem;
+}
+
+.trin-kort p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #5a4470;
+}
+
+/* ---------- Små skærme (mobil) ---------- */
+@media (max-width: 800px) {
+    .hero {
+        flex-direction: column;
+    }
+
+    .trin-liste {
+        grid-template-columns: 1fr 1fr;
+    }
 }
