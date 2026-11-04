@@ -26,10 +26,11 @@
             <span class="brand-sub">MUMS FILIBABA</span>
         </div>
         <a href="/forside" class="nav-link active">Forside</a>
-        <a href="bestil.html" class="nav-link">Bestil</a>
+        <a href="/bestil" class="nav-link">Bestil</a>
     </div>
 
     <div class="nav-right">
+
         <span class="nav-email" id="email" th:text="${user!=null ? user.email : 'Guest'}">Guest</span>
 
         <div class="saldo-dropdown" th:if="${user != null}">
@@ -46,6 +47,7 @@
         </div>
 
 
+        <a href="/admin" class="nav-link" id="admin" th:if="${user != null && user.isAdmin()}">Admin</a>
 
         <a href="/bestil" class="nav-link" th:if="${user != null}">Kurv</a>
 
