@@ -1,10 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
+<link rel="preconnect"
+      href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+      href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet">
 <head>
     <meta charset="UTF-8">
     <title>Forside</title>
+
+    <link rel="stylesheet" href="/css/index.css">
+
 </head>
-<body>
+<script> function logbutton(){
+    if (document.getElementById("email").value !==null) {
+        document.getElementById("logbutton").href = "/logout";
+        document.getElementById("logbutton").innerHTML = "Log ud";
+    } else {
+        document.getElementById("logbutton").href = "/login";
+        document.getElementById("logbutton").innerHTML = "Log ind";
+    }
+
+}
+
+
+
+</script>
+
+<body class="background">
+
+<nav class="navbar">
+    <div class="nav-left">
+        <div class="brand">
+            <span class="brand-name">OLSKER CUPCAKES</span>
+            <span class="brand-sub">MUMS FILIBABA</span>
+        </div>
+        <a href="/forside" class="nav-link active">Forside</a>
+        <a href="bestil.html" class="nav-link">Bestil</a>
+    </div>
+
+    <div class="nav-right">
+        <span class="nav-email" id="email" th:text="${user!=null ? user.email : 'Guest'}">Guest</span>
+        <span class="nav-saldo">Saldo: 0 kr</span>
+        <a href="/bestil" class="nav-link">Kurv</a>
+
+        <a href="/login" class="nav-link" th:if="${user == null}">Log ind</a>
+
+
+        <a href="/logout" class="nav-link" th:if="${user !=null}">Log ud</a>
+    </div>
+</nav>
+<div class="leftmargin">
+    <textcolor2>
+
+        <h6>BORNHOLMS HYGGELIGESTE BAGERI</h6>
+
+    </textcolor2>
+</div>
+<div class="leftmargin">
+    <textcolor1>
+        <h1>Velkommen ombord</h1>
+    </textcolor1>
+</div>
+
+<div class="leftmargin">
+<h5 class="hero-sub">Øens bedste cupcakes. Sæt din egen sammen af en bund og en topping, og hent dem i butikken.</h5>
+</div>
+
+    <div class="frontimage">
+<img src="/cupcakelogo.png" alt="image" >
+    </div>
+
+<form action="/bestil" method="GET" >
+
+    <button class="orderbutton" > Bestil cupcakes -> </button>
+
+</form>
+<div class="leftmargin">
+    <textcolor1>
+        <h2 style="margin-top: 100px">Sådan bestiller du</h2>
+    </textcolor1>
+</div>
+<positionfix1>
+<div class="leftmargin">
+    <div class="infobox">
+
+            <h5 class="circlenumber">1</h5>
+
+    <h5 class="infoboxtext">Vaelg bund og topping</h5>
+
+        <h5 class="infoboxtext2">Du kan tilføje så mange rækker du ønsker, med alle de kombinationer hjertet begærer.</h5>
+
+
+    </div>
+</div>
+
+<div class="leftmargin">
+    <div class="infobox">
+
+        <h5 class="circlenumber">2</h5>
+
+            <h5 class="infoboxtext">Se prisen med det samme</h5>
+
+        <h5 class="infoboxtext2">Prisen på hver bund, topping kan ses i dropdown menuen, og den samlede pris står ved siden af</h5>
+
+
+    </div>
+</div>
+
+    <div class="leftmargin">
+        <div class="infobox">
+
+            <h5 class="circlenumber">3</h5>
+
+            <h5 class="infoboxtext">Betal og hent</h5>
+
+            <h5 class="infoboxtext2">Beløbet trækkes fra din saldo, og du henter din cupcakes i butikken.</h5>
+
+
+        </div>
+    </div>
+
+    <div class="leftmargin">
+        <div class="infobox">
+
+            <h5 class="circlenumber">4</h5>
+
+            <h5 class="infoboxtext">God fornøjelse</h5>
+
+            <h5 class="infoboxtext2">Nu kan du nyde dine friske cupcakes til hvilken som helst lejlighed uden ventetid!</h5>
+
+
+        </div>
+    </div>
+
+</positionfix1>
+<footer class="bottombar"> Olsker Cupcakes * Olsker, Bornholm </footer>
+
 
 </body>
 </html>

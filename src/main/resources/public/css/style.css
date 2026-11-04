@@ -1,3 +1,16 @@
+.page-wrapper {
+    width: 100%;
+    max-width: 480px;
+    padding: 40px 24px 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
 /* =====================================================
    Olsker Cupcakes - CSS til alle sider
    Filen skal ligge i: src/main/resources/public/css/style.css

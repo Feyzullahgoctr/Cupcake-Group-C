@@ -27,6 +27,16 @@ public class UserController {
 
         app.routes.get("/register", ctx -> ctx.render("register"));
         app.routes.post("/register", ctx -> register(ctx));
+
+        app.routes.get("/", ctx -> {
+            Map<String, Object> model = new HashMap<>();
+            User user = ctx.sessionAttribute("user");
+            model.put("user", user);
+            ctx.render("/index.html", model);
+        });
+
+        app.routes.get("/bestil", ctx -> ctx.render("/bestil.html"));
+
     }
 
     private void login(@NotNull Context ctx) {
