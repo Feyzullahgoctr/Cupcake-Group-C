@@ -1,0 +1,590 @@
+/* =====================================================
+   Olsker Cupcakes - CSS til alle sider
+   Filen skal ligge i: src/main/resources/public/css/style.css
+
+   Filen er delt op i afsnit:
+   1. Farver
+   2. Generelt (bruges på alle sider)
+   3. Knapper
+   4. Topmenu og bund
+   5. Formularer (felter, labels, beskeder)
+   6. Forside
+   7. Bestillingsside
+   8. Saldo-side
+   9. Log ind og opret bruger
+   ===================================================== */
+
+
+/* =====================================================
+   1. FARVER
+   Vi gemmer farverne ét sted som "variabler".
+   Så skal vi kun rette farven her, hvis vi vil ændre den.
+   Man bruger dem sådan: color: var(--lilla);
+   ===================================================== */
+:root {
+    --lilla: #3B1A5A;        /* topmenu, bund og overskrifter */
+    --pink: #B02A6B;         /* knapper og links */
+    --baggrund: #FBF7FC;     /* baggrund på hele siden */
+    --hvid: #FFFFFF;         /* kort og felter */
+    --tekst: #2A1640;        /* almindelig tekst */
+    --graa-tekst: #4A3A5C;   /* mindre vigtig tekst */
+    --kant: #E6DCEC;         /* kant rundt om kort */
+    --lys-lilla: #F1E6F6;    /* cirklen med tal på forsiden */
+    --rod: #8A1F3D;          /* fejlbeskeder og "Fjern"-knap */
+    --gron: #1E6B34;         /* "det gik godt"-beskeder */
+}
+
+
+/* =====================================================
+   2. GENERELT
+   ===================================================== */
+body {
+    margin: 0;
+    background: var(--baggrund);
+    font-family: 'Nunito Sans', sans-serif;
+    color: var(--tekst);
+}
+
+a {
+    color: inherit; /* links får samme farve som teksten omkring dem */
+}
+
+h1 {
+    margin: 0 0 8px;
+    font-family: Fredoka, sans-serif;
+    font-weight: 600;
+    font-size: 48px;
+    color: var(--lilla);
+}
+
+h2 {
+    margin: 0 0 16px;
+    font-family: Fredoka, sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--lilla);
+}
+
+/* Indholdet på siden. max-width gør at teksten ikke bliver alt for bred */
+main {
+    max-width: 1200px;
+    margin: 0 auto; /* "auto" centrerer indholdet */
+    padding: 48px 32px 80px;
+}
+
+/* Lille forklarende tekst under en overskrift */
+.intro {
+    margin: 0 0 32px;
+    font-size: 18px;
+    color: var(--graa-tekst);
+}
+
+/* Hvid boks med afrundede hjørner (bruges på forsiden) */
+.kort {
+    background: var(--hvid);
+    border: 1px solid var(--kant);
+    border-radius: 18px;
+    padding: 24px;
+}
+
+
+/* =====================================================
+   3. KNAPPER
+   ===================================================== */
+
+/* Pink knap. Kan bruges både på <a> og <button> */
+.knap {
+    display: inline-block;
+    background: var(--pink);
+    color: var(--hvid);
+    border: none;
+    border-radius: 14px;
+    padding: 18px 32px;
+    font: inherit;
+    font-size: 20px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer; /* viser en "hånd", når musen er over knappen */
+}
+
+/* Knap der fylder hele bredden. Bruges sammen med .knap */
+.knap-fuld {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    font-size: 18px;
+    text-align: center;
+}
+
+
+/* =====================================================
+   4. TOPMENU OG BUND
+   ===================================================== */
+header {
+    background: var(--lilla);
+    color: var(--hvid);
+}
+
+/* flex lægger logo, menu og bruger ved siden af hinanden */
+nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px 32px;
+    display: flex;
+    flex-wrap: wrap;      /* går ned på en ny linje på små skærme */
+    align-items: center;
+    gap: 16px 32px;       /* afstand mellem tingene */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: Fredoka, sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.1;
+    text-decoration: none;
+}
+
+.logo small {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+}
+
+.menu {
+    display: flex;
+    flex: 1;  /* menuen fylder pladsen i midten, så brugeren skubbes til højre */
+    gap: 24px;
+}
+
+.menu a {
+    padding: 10px 0;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* Den side man er på lige nu får en streg under */
+.menu a.aktiv {
+    border-bottom: 2px solid var(--hvid);
+    font-weight: 700;
+}
+
+/* Email, saldo, kurv og log ud i højre side */
+.bruger {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 15px;
+}
+
+.saldo {
+    background: rgba(255, 255, 255, 0.15); /* hvid, men næsten gennemsigtig */
+    padding: 6px 12px;
+    border-radius: 999px;                  /* helt runde ender */
+}
+
+footer {
+    background: var(--lilla);
+    color: var(--hvid);
+    text-align: center;
+    padding: 24px;
+    font-size: 14px;
+}
+
+
+/* =====================================================
+   5. FORMULARER
+   ===================================================== */
+
+/* Et felt = en label og et input under hinanden */
+.felt {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+label {
+    font-weight: 700;
+    font-size: 14px;
+}
+
+select,
+input {
+    height: 48px;
+    padding: 10px 12px;
+    box-sizing: border-box; /* padding regnes med i højden */
+    border: 1px solid #C9B8D6;
+    border-radius: 10px;
+    background: var(--hvid);
+    color: var(--tekst);
+    font: inherit;
+    font-size: 16px;
+}
+
+/* Beskeder til brugeren */
+.besked {
+    margin: 0;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.besked.ok {
+    background: #E6F4EA;
+    color: var(--gron);
+}
+
+.besked.fejl {
+    background: #FBE9EE;
+    color: var(--rod);
+}
+
+
+/* =====================================================
+   6. FORSIDE (index.html)
+   ===================================================== */
+
+/* Forsiden fylder hele bredden */
+main.forside {
+    max-width: none;
+    padding: 0;
+}
+
+/* Øverste del med tekst til venstre og billede til højre */
+.velkomst {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 64px 32px 40px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 40px;
+}
+
+.velkomst .tekst {
+    flex: 1 1 380px;
+}
+
+.velkomst .billede {
+    flex: 1 1 520px;
+}
+
+.velkomst img {
+    display: block;
+    width: 100%;
+    border-radius: 24px;
+    background: var(--hvid);
+    box-shadow: 0 10px 30px rgba(59, 26, 90, 0.12); /* blød skygge */
+}
+
+.velkomst h1 {
+    margin-bottom: 16px;
+    font-size: 64px;
+    line-height: 1.05;
+}
+
+.velkomst .intro {
+    max-width: 480px;
+    font-size: 20px;
+    line-height: 1.5;
+    color: var(--tekst);
+}
+
+/* Lille pink tekst over overskriften */
+.lille-overskrift {
+    margin: 0 0 12px;
+    color: var(--pink);
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase; /* store bogstaver */
+    letter-spacing: 1px;
+}
+
+/* "Sådan bestiller du" med tre kort */
+.trin {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 32px 80px;
+}
+
+.trin h2 {
+    margin-bottom: 24px;
+    font-size: 32px;
+}
+
+/* grid lægger kortene ved siden af hinanden og laver selv nye rækker */
+.kort-liste {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+}
+
+.kort h3 {
+    margin: 0 0 6px;
+    font-size: 20px;
+}
+
+.kort p {
+    margin: 0;
+    line-height: 1.5;
+    color: var(--graa-tekst);
+}
+
+/* Den runde cirkel med 1, 2 og 3 */
+.nummer {
+    width: 44px;
+    height: 44px;
+    margin-bottom: 12px;
+    border-radius: 999px;
+    background: var(--lys-lilla);
+    color: var(--lilla);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Fredoka, sans-serif;
+    font-size: 22px;
+}
+
+
+/* =====================================================
+   7. BESTILLINGSSIDE (bestil.html)
+   ===================================================== */
+
+/* Rækkerne til venstre og oversigten til højre */
+.indhold {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 32px;
+}
+
+/* --- Venstre side: rækker med bund, topping og antal --- */
+.raekker {
+    flex: 999 1 560px; /* tager det meste af pladsen */
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.raekke {
+    background: var(--hvid);
+    border: 1px solid var(--kant);
+    border-radius: 18px;
+    padding: 20px 24px;
+}
+
+/* "Cupcake 1" til venstre og "Fjern" til højre */
+.raekke-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.raekke h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+/* Bund, topping, antal og pris ved siden af hinanden */
+.felter {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 16px;
+}
+
+.felter .felt {
+    flex: 2 1 160px;
+    min-width: 0;
+}
+
+.felter .felt.antal {
+    flex: 0 1 110px; /* antal-feltet er smallere */
+}
+
+.felter .felt.pris {
+    flex: 0 1 120px;
+    text-align: right;
+}
+
+.felt-navn {
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.pris-tal {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.fjern {
+    background: none;
+    border: 1px solid var(--kant);
+    border-radius: 10px;
+    padding: 8px 14px;
+    color: var(--rod);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Knappen "+ Tilføj en række mere" med stiplet kant */
+.tilfoej {
+    background: var(--hvid);
+    border: 2px dashed #B79BCB;
+    border-radius: 18px;
+    padding: 18px;
+    color: var(--lilla);
+    font: inherit;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* --- Højre side: oversigt med priser --- */
+.oversigt {
+    flex: 1 1 320px;
+    background: var(--hvid);
+    border: 1px solid var(--kant);
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 10px 30px rgba(59, 26, 90, 0.08);
+}
+
+/* Én linje i oversigten, fx "2 x Chocolate + Blueberry" */
+.linje {
+    padding: 14px 0;
+    border-bottom: 1px solid #EFE6F3;
+}
+
+/* Tekst til venstre og pris til højre */
+.linje div {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: var(--graa-tekst);
+}
+
+.linje div.hoved {
+    margin-bottom: 4px;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--tekst);
+}
+
+.total {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin: 20px 0 6px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+/* Den store samlede pris */
+.total span:last-child {
+    font-family: Fredoka, sans-serif;
+    font-size: 36px;
+    color: var(--lilla);
+}
+
+.antal-ialt {
+    margin: 0 0 20px;
+    font-size: 14px;
+    color: var(--graa-tekst);
+}
+
+
+/* =====================================================
+   8. SALDO-SIDE (saldo.html)
+   ===================================================== */
+.saldo-indhold {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 32px;
+}
+
+.saldo-kort {
+    flex: 1 1 320px;
+    background: var(--hvid);
+    border: 1px solid var(--kant);
+    border-radius: 18px;
+    padding: 24px;
+}
+
+.saldo-kort .felt-navn {
+    margin: 0;
+}
+
+/* Den store saldo, fx "220 kr" */
+.saldo-tal {
+    margin: 4px 0 16px;
+    font-family: Fredoka, sans-serif;
+    font-size: 56px;
+    font-weight: 600;
+    color: var(--lilla);
+}
+
+.saldo-kort form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+
+/* =====================================================
+   9. LOG IND OG OPRET BRUGER (login.html og register.html)
+   ===================================================== */
+
+/* Smal side, så formularen står i midten */
+main.login-side {
+    max-width: 480px;
+    padding-top: 64px;
+}
+
+.login-kort {
+    background: var(--hvid);
+    border: 1px solid var(--kant);
+    border-radius: 18px;
+    padding: 32px;
+    box-shadow: 0 10px 30px rgba(59, 26, 90, 0.08);
+}
+
+.login-kort h1 {
+    font-size: 40px;
+}
+
+.login-kort .intro {
+    margin-bottom: 24px;
+    font-size: 16px;
+}
+
+.login-kort form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.login-kort .besked {
+    margin-bottom: 16px;
+}
+
+/* "Har du ikke en konto? Opret en her" */
+.skift {
+    margin: 24px 0 0;
+    text-align: center;
+    color: var(--graa-tekst);
+}
+
+.skift a {
+    color: var(--pink);
+    font-weight: 700;
+}

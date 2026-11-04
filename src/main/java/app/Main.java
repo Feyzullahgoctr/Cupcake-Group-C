@@ -1,8 +1,9 @@
 package app;
 
 import app.configuration.ThymeleafConfig;
-import app.controllers.MainpageController;
+import app.controllers.UserController;
 import app.persistence.ConnectionPool;
+import app.services.UserService;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
 
@@ -20,7 +21,9 @@ public class Main {
 
             config.staticFiles.add("/public");
             config.fileRenderer(new JavalinThymeleaf(ThymeleafConfig.templateEngine()));
-            new MainpageController(connectionPool).setRoutes(config);
+
+            UserController userController = new UserController(connectionPool);
+            userController.setRoutes(config);
 
 
         }).start(7070);
