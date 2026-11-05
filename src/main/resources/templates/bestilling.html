@@ -17,8 +17,8 @@
             <span class="brand-name">OLSKER CUPCAKES</span>
             <span class="brand-sub">MUMS FILIBABA</span>
         </div>
-        <a href="/" class="nav-link active">Forside</a>
-        <a href="/bestil" class="nav-link">Bestil</a>
+        <a href="/" class="nav-link">Forside</a>
+        <a href="/orderoverview" class="nav-link" th:if="${user != null}">Ordrehistorik</a>
     </div>
 
     <div class="nav-right">
@@ -41,7 +41,7 @@
 
         <a href="/admin" class="nav-link" id="admin" th:if="${user != null && user.isAdmin()}">Admin</a>
 
-        <a href="/bestil" class="nav-link" th:if="${user != null}">Kurv</a>
+        <a href="/bestil" class="nav-link active" th:if="${user != null}">Kurv</a>
 
         <a href="/login" class="nav-link" th:if="${user == null}">Log ind</a>
 

@@ -20,7 +20,7 @@
             <span class="brand-sub">MUMS FILIBABA</span>
         </div>
         <a href="/" class="nav-link active">Forside</a>
-        <a href="/bestil" class="nav-link">Bestil</a>
+        <a href="/orderoverview" class="nav-link" th:if="${user != null}">Ordrehistorik</a>
     </div>
 
     <div class="nav-right">
