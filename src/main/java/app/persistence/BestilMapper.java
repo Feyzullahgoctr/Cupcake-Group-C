@@ -235,6 +235,31 @@ public class BestilMapper {
 
         return orderlines;
     }
+    public List<Order> getOrdersByUserId(int user_id) throws DatabaseException {
+    String query = "SELECT * FROM orders WHERE user_id = ? ORDER BY create_date ";
 
+            List<Order> orders = new ArrayList<>();
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement stm = connection.prepareStatement(query)) {
 
+            stm.setInt(1, user_id);
+
+            try (ResultSet rs = stm.executeQuery()) {
+                while (rs.next()) {
+
+                    orders.add(new Order(
+                            rs.getInt("order_id"),
+                            rs.getInt("user_id"),
+                            rs.getTimestamp("create_date").toLocalDateTime(),
+                            Status.valueOf(rs.getString("status")),
+                            rs.getDouble("total_price")
+                    ));
+                }
+            }        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
+            throw new DatabaseException("Kunne ikke hente orderlines.");
+        }
+
+        return orders;
+    }
 }

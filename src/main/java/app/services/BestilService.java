@@ -1,11 +1,13 @@
 package app.services;
 
+import app.dto.OrderDTO;
 import app.dto.OrderlineDTO;
 import app.entities.*;
 import app.exceptions.DatabaseException;
 import app.persistence.BestilMapper;
 import app.persistence.ConnectionPool;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BestilService {
@@ -96,5 +98,13 @@ public class BestilService {
         return null;
     }
 
+    public List<OrderDTO> getOrderOverviewByUserId(int user_id) throws DatabaseException {
+        List<Order> orders = bestilMapper.getOrdersByUserId(user_id);
+        List<OrderDTO> orderDTOs = new ArrayList<>();
+        for (Order order : orders){
+            orderDTOs.add(new OrderDTO(order.getOrder_id(), order.getOrderDate(), order.getStatus(), order.getTotalPrice(), getOrderlineByOrderid(order.getOrder_id())));
+        }
+        return orderDTOs;
+    }
 
 }
