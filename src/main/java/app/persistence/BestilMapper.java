@@ -184,6 +184,23 @@ public class BestilMapper {
             throw new DatabaseException("Kunne ikke slette order");
         }
     }
+    public void deleteOrder(int order_id) throws DatabaseException {
+        String query = "delete from orders WHERE order_id = ?";
+
+
+        try(Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement prepareStatement = connection.prepareStatement(query)) {
+                prepareStatement.setInt(1, order_id);
+
+                prepareStatement.executeUpdate();
+            }
+        }
+            catch (SQLException e)
+            {
+                logger.error(e.getMessage(), e);
+                throw new DatabaseException("Kunne ikke slette order");
+            }
+        }
 
 
     public List<OrderlineDTO> getOrderlineByOrderid(int order_id)
