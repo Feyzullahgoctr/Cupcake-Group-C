@@ -144,7 +144,6 @@ public class BestilController {
         ctx.attribute("user", user);
 
         Integer orderId = ctx.sessionAttribute("order_id");
-
         if (orderId != null) {
             List<OrderlineDTO> orderItems =
                     bestilService.getOrderlineByOrderid(orderId);

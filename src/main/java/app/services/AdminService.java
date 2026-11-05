@@ -1,5 +1,6 @@
 package app.services;
 
+import app.dto.AdminOrderDTO;
 import app.entities.Order;
 import app.entities.User;
 import app.exceptions.DatabaseException;
@@ -34,6 +35,10 @@ public class AdminService {
 
     public List<Order> getOrdersForCustomer(int userId) throws DatabaseException {
         return adminMapper.getOrdersByUserId(userId);
+    }
+
+    public List<AdminOrderDTO> getAllOrders() throws DatabaseException {
+        return adminMapper.getAllOrders();
     }
 
 

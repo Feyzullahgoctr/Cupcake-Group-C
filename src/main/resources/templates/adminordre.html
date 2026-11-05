@@ -1,10 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ordrer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/admin.css">
 </head>
+
 <body>
+
+<header>
+    <nav>
+        <a class="logo" href="/admin/ordrer">OLSKER CUPCAKES<small>ADMIN</small></a>
+        <div class="menu">
+            <a class="aktiv" href="/admin/ordrer">Ordrer</a>
+            <a href="/admin/kunder">Kunder</a>
+        </div>
+        <div class="bruger">
+            <span th:text="${user.email}"></span>
+            <a href="/logout">Log ud</a>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <h1>Ordrer</h1>
+    <p class="intro">Alle ordrer i systemet, nyeste først.</p>
+    <!-- Vises kun hvis der ingen ordrer er -->
+    <p class="intro" th:if="${orders.isEmpty()}">Der er ingen ordrer endnu.</p>
+    <!-- AC 1: alle ordrer. AC 2: kunde, ordrelinjer, samlet pris og status -->
+    <table class="tabel" th:unless="${orders.isEmpty()}">
+        <thead>
+        <tr>
+            <th>Ordre nr.</th>
+            <th>Kunde</th>
+            <th>Dato</th>
+            <th>Indhold</th>
+            <th>Status</th>
+            <th class="hoejre">Pris</th>
+        </tr>
+        </thead>
+        <tbody>
+
+<tr th:each="order : ${orders}">
+    <td th:text="${order.order_id}"></td>
+    <td th:text="${order.email}"></td>
+    <td th:text="${#temporals.format(order.orderDate, 'dd-MM-yyyy')}"></td>
+    <td>
+        <div th:each="line : ${order.orderlines}"
+             th:text="${line.amount} + ' × ' + ${line.bottomName} + ' + ' + ${line.toppingName}">
+        </div>
+    </td>
+    <td><span th:class="'status ' + ${order.status}" th:text="${order.status}"></span></td>
+    <td class="hoejre" th:text="${#numbers.formatInteger(order.totalPrice, 1)} + ' kr'"></td>
+</tr>
+        </tbody>
+    </table>
+</main>
+
+<footer>Olsker Cupcakes · Olsker, Bornholm</footer>
 
 </body>
 </html>
