@@ -72,7 +72,7 @@
                                 <option value="">Vælg...</option>
                                 <option th:each="b : ${bottoms}"
                                         th:value="${b.bottom_id}"
-                                        th:text="${b.name}"
+                                        th:text="${b.name + ' ' + b.price + ' kr.'}"
                                         th:selected="${b.bottom_id == item.bottom_id}">
                                 </option>
                             </select>
@@ -83,7 +83,7 @@
                                 <option value="">Vælg...</option>
                                 <option th:each="t : ${toppings}"
                                         th:value="${t.topping_id}"
-                                        th:text="${t.name}"
+                                        th:text="${t.name + ' ' + t.price + ' kr.'}"
                                         th:selected="${t.topping_id == item.topping_id}">
                                 </option>
                             </select>
@@ -114,7 +114,7 @@
                                 <option value="">Vælg...</option>
                                 <option th:each="b : ${bottoms}"
                                         th:value="${b.bottom_id}"
-                                        th:text="${b.name}">
+                                        th:text="${b.name + ' ' + b.price + ' kr.'}">
                                 </option>
                             </select>
                         </label>
@@ -124,7 +124,7 @@
                                 <option value="">Vælg...</option>
                                 <option th:each="t : ${toppings}"
                                         th:value="${t.topping_id}"
-                                        th:text="${t.name}">
+                                        th:text="${t.name + ' ' + t.price + ' kr.'}">
                                 </option>
                             </select>
                         </label>
