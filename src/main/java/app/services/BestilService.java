@@ -107,4 +107,8 @@ public class BestilService {
         return orderDTOs;
     }
 
+    public void deleteOrder(int order_id) throws DatabaseException {
+        bestilMapper.deleteOrder(order_id);
+    }
+
 }
