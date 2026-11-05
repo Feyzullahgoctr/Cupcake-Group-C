@@ -62,7 +62,7 @@ public class AdminMapper {
     public List<OrderlineDTO> getOrderLines(int orderId) throws DatabaseException {
         List<OrderlineDTO> orderlines = new ArrayList<>();
         String query = """
-                SELECT ol.orderline_id, b.bottom_id, t.topping_id, ol.amount, ol.price,
+                SELECT ol.orderline_id, ol.order_id, b.bottom_id, t.topping_id, ol.amount, ol.price,
                        b.bottom_name, t.topping_name
                 FROM orderlines ol
                 JOIN bottoms b ON ol.bottom_id = b.bottom_id
