@@ -27,7 +27,26 @@ public class AdminController {
     public void setRoutes(JavalinConfig app){
         app.routes.get("/admin/kunder", ctx -> showCustomers(ctx));
         app.routes.get("/admin/kunder/{id}", ctx -> showCustomer(ctx));
+
+        app.routes.get("/admin", ctx -> ctx.redirect("/admin/ordrer"));
+        app.routes.get("/admin/ordrer", ctx -> showOrders(ctx));
     }
+
+    private void showOrders(@NotNull Context ctx) throws DatabaseException {
+        if (!isAdmin(ctx)) {
+            ctx.redirect("/login");
+            return;
+        }
+        try{
+            Map<String, Object> model = new HashMap<>();
+            model.put("user", ctx.sessionAttribute("user"));
+            model.put("orders", adminService.getAllOrders());
+            ctx.render("adminordre", model);
+        } catch (DatabaseException e){
+            ctx.result(e.getMessage());
+        }
+    }
+
 
     public void showCustomer(@NotNull Context ctx) throws DatabaseException {
         if (!isAdmin(ctx)) {

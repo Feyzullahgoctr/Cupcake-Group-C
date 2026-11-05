@@ -1,6 +1,9 @@
 package app.persistence;
 
+import app.dto.AdminOrderDTO;
+import app.dto.OrderlineDTO;
 import app.entities.Order;
+import app.entities.Orderline;
 import app.entities.Status;
 import app.entities.User;
 import app.exceptions.DatabaseException;
@@ -23,6 +26,71 @@ public class AdminMapper {
 
     public AdminMapper(ConnectionPool connectionPool){
         this.connectionPool = connectionPool;
+    }
+
+
+    public List<AdminOrderDTO> getAllOrders() throws DatabaseException {
+        List<AdminOrderDTO> orders = new ArrayList<>();
+        String query = """
+                SELECT o.order_id, u.email, o.create_date, o.status, o.total_price
+                FROM orders o
+                JOIN users u ON o.user_id = u.user_id
+                ORDER BY o.create_date DESC, o.order_id DESC
+                """;
+
+        try (Connection conn = connectionPool.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(query);
+        ResultSet rs = stmt.executeQuery()) {
+            while((rs.next())){
+                int orderId = rs.getInt("order_id");
+                String email = rs.getString("email");
+                LocalDateTime orderDate = rs.getTimestamp("create_date").toLocalDateTime();
+                Status status = Status.valueOf(rs.getString("status"));
+                double totalPrice = rs.getDouble("total_price");
+
+                List<OrderlineDTO> orderlines = getOrderLines(orderId);
+                orders.add(new AdminOrderDTO(orderId, email, orderDate, status, totalPrice, orderlines));
+            }
+        } catch (SQLException e){
+            logger.error("Fejl ved hentning af alle ordrer", e);
+            throw new DatabaseException("Kunne ikke hente ordrer", e.getMessage());
+        }
+        return orders;
+    }
+
+    public List<OrderlineDTO> getOrderLines(int orderId) throws DatabaseException {
+        List<OrderlineDTO> orderlines = new ArrayList<>();
+        String query = """
+                SELECT ol.orderline_id, b.bottom_id, t.topping_id, ol.amount, ol.price,
+                       b.bottom_name, t.topping_name
+                FROM orderlines ol
+                JOIN bottoms b ON ol.bottom_id = b.bottom_id
+                JOIN toppings t ON ol.topping_id = t.topping_id
+                WHERE ol.order_id = ?
+                """;
+
+        try (Connection conn = connectionPool.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, orderId);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    orderlines.add(new OrderlineDTO(
+                            rs.getInt("orderline_id"),
+                            rs.getInt("bottom_id"),
+                            rs.getInt("topping_id"),
+                            rs.getInt("amount"),
+                            rs.getDouble("price"),
+                            rs.getString("bottom_name"),
+                            rs.getString("topping_name")
+                    ));
+                }
+            }
+        } catch (SQLException e){
+            logger.error("Fejl ved hentning af ordrelinjer for ordre: {}", orderId, e);
+            throw new DatabaseException("Kunne ikke hente ordrelinjer", e.getMessage());
+        }
+        return orderlines;
     }
 
 
