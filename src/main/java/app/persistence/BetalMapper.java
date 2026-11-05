@@ -39,5 +39,26 @@ public class BetalMapper {
         }
     }
 
+    public void updateUserBalance(String email, double totalprice) throws DatabaseException
+    {
+        String sql = "update users set balance = ?  where email = ?";
+        try (Connection connection = connectionPool.getConnection())
+        {
+            try (PreparedStatement prepareStatement = connection.prepareStatement(sql))
+            {
+                prepareStatement.setDouble(1, totalprice);
+                prepareStatement.setString(2, email);
+
+                prepareStatement.executeUpdate();
+
+            }
+        }
+        catch (SQLException e)
+        {
+            logger.error(e.getMessage(), e);
+            throw new DatabaseException("Kunne ikke opdater balance i user");
+        }
+    }
+
 
 }

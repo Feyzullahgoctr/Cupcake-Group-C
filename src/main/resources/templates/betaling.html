@@ -72,12 +72,15 @@
             </div>
         </div>
 
+        <p class="fejl" role="alert" th:if="${msg != null}" th:text="${msg}"></p>
+
         <div class="knapper">
             <a href="/bestil" class="annuller">Annuller</a>
             <form action="/betal/bekraeft" method="post">
                 <input type="hidden" name="order_id" th:value="${order_id}">
                 <button type="submit" class="bekraeft">Ja, betal nu</button>
-            </form>
+            </form><br>
+
         </div>
     </div>
 </main>

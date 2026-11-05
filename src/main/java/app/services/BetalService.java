@@ -18,5 +18,9 @@ public class BetalService {
         betalMapper.updateOrderStatus(order_id, status);
     }
 
+    public void updateUserBalance(String email, double totalprice) throws DatabaseException {
+        betalMapper.updateUserBalance(email, totalprice);
+    }
+
 
 }

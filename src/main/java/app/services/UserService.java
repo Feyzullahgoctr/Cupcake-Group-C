@@ -43,4 +43,8 @@ public class UserService {
     public void getUserBalanceByEmail(String email) throws DatabaseException {
         userMapper.getUserBalanceByEmail(email);
     }
+
+    public User getUserByEmail(String email) throws DatabaseException {
+        return userMapper.getUserByEmail(email);
+    }
 }
