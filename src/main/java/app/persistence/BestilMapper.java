@@ -192,6 +192,7 @@ public class BestilMapper {
         String query = """
             
                 SELECT ol.orderline_id,
+                       ol.order_id,
                    b.bottom_id,
                    t.topping_id,
                    ol.amount,
@@ -216,6 +217,7 @@ public class BestilMapper {
 
                     orderlines.add(new OrderlineDTO(
                             rs.getInt("orderline_id"),
+                            rs.getInt("order_id"),
                             rs.getInt("bottom_id"),
                             rs.getInt("topping_id"),
                             rs.getInt("amount"),

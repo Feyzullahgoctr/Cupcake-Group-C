@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <title>Bestil</title>
     <link rel="stylesheet" href="/css/index.css">
-    <link rel="stylesheet" href="/css/bestil.css">
+    <link rel="stylesheet" href="/css/bestilling.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body class="background">
 
@@ -147,12 +150,13 @@
 
 
         <div class="oversigt">
-            <form action="">
+            <form action="/betal" method="post">
                 <p>Oversigt</p>
 
                 <div th:if="${orderItems != null and !orderItems.isEmpty()}">
 
                     <div class="oversigtdetaljeret" th:each="item : ${orderItems}">
+                        <input type="hidden" name="order_id" th:value="${item.order_id}">
                         <p th:text="${item.amount + ' x ' + item.bottomName + ' + ' + item.toppingName}"></p>
 
                         <p th:text="${'Bund: ' + item.bottomName}"></p>
@@ -168,7 +172,7 @@
                         <strong th:text="${totalPrice + ' kr'}"></strong>
                     </div>
 
-                    <button type="button">Betal nu</button>
+                    <button type="submit">Betal nu</button>
                 </div>
 
             </form>

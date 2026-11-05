@@ -66,7 +66,7 @@ public class BestilController {
                 ctx.attribute("editing", true);
             }
 
-            ctx.render("/bestil.html");
+            ctx.render("/bestilling.html");
 
         } else {
             ctx.redirect("/login");
@@ -130,7 +130,7 @@ public class BestilController {
             ctx.attribute("totalAmount", totalAmount);
             ctx.attribute("editing", false);
 
-            ctx.render("/bestil.html");
+            ctx.render("/bestilling.html");
         } else {
             ctx.redirect("/login");
         }
@@ -165,7 +165,7 @@ public class BestilController {
         ctx.attribute("toppings", bestilService.getToppings());
         ctx.attribute("editing", true);
 
-        ctx.render("/bestil.html");
+        ctx.render("/bestilling.html");
     }
     
 }

@@ -1,0 +1,146 @@
+/* Betalingsbekræftelse (bruger klasserne: betalindhold, inhold, ordre, price) */
+.betalindhold {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 32px 40px 36px;
+    background-color: #ffffff;
+    border-radius: 14px;
+    text-align: center;
+    color: #402052;
+    font-family: 'Nunito', Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+.betalindhold img {
+    width: 96px;
+    height: 80px;
+    display: block;
+    margin: 0 auto 8px;
+}
+
+.betalindhold h3 {
+    font-family: 'Fredoka', 'Nunito', Arial, sans-serif;
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin: 8px 0 10px;
+    color: #4a1f66;
+}
+
+.betalindhold > p {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin: 0 0 28px;
+}
+
+/* Boksen med ordre og total */
+.betalindhold .inhold {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 24px 30px;
+    margin-bottom: 22px;
+    background-color: #faf5fd;
+    border-radius: 14px;
+    text-align: left;
+}
+
+.betalindhold .ordre p {
+    margin: 0 0 12px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.betalindhold .ordre span {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+.betalindhold .price {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+}
+
+.betalindhold .price strong {
+    font-family: 'Fredoka', 'Nunito', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.betalindhold .price strong:last-child {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* Knapper */
+.betalindhold .knapper {
+    display: flex;
+    gap: 18px;
+}
+
+.betalindhold .knapper form {
+    flex: 1;
+    display: flex;
+    margin: 0;
+}
+
+.betalindhold .annuller,
+.betalindhold .bekraeft {
+    flex: 1;
+    box-sizing: border-box;
+    height: 48px;
+    border-radius: 12px;
+    border: 1px solid #8a1fd1;
+    font-family: 'Nunito', Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.betalindhold .annuller {
+    background-color: #ffffff;
+    color: #8a1fd1;
+}
+
+.betalindhold .annuller:hover {
+    background-color: #faf5fd;
+}
+
+.betalindhold .bekraeft {
+    background-color: #b32778;
+    color: #ffffff;
+}
+
+.betalindhold .bekraeft:hover {
+    background-color: #9a1f67;
+}
+
+/* Mobil */
+@media (max-width: 600px) {
+    .betalindhold {
+        margin: 16px;
+        padding: 24px 20px;
+    }
+
+    .betalindhold .inhold {
+        flex-direction: column;
+    }
+
+    .betalindhold .price {
+        align-items: flex-start;
+    }
+
+    .betalindhold .knapper {
+        flex-direction: column;
+    }
+}
