@@ -1,10 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Orderoverview</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Log ind - Olsker Cupcakes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
 </head>
-<body>
+<body class="background">
+
+<header>
+    <nav class="navbar">
+        <div class="nav-left">
+            <div class="brand">
+                <span class="brand-name">OLSKER CUPCAKES</span>
+                <span class="brand-sub">MUMS FILIBABA</span>
+            </div>
+                <a href="/orderoverview" class="nav-link active" th:if="${user != null}">Ordrehistorik</a>
+
+        </div>
+        <div class="nav-right">
+            <a href="/" class="nav-link">Forside</a>
+            <a href="/bestil" class="nav-link" th:if="${user != null}">Kurv</a>
+
+        </div>
+
+    </nav>
+</header>
+
+<main class="orderoverview">
+    <h1>Ordreoversigt</h1>
+
+    <p th:if="${#lists.isEmpty(orders)}" class="ordre-tom">Ingen ordrer endnu</p>
+
+    <div class="ordre-grid" th:if="${!#lists.isEmpty(orders)}">
+        <div class="ordre-boks" th:each="order : ${orders}">
+            <h2 th:text="'Ordre ' + ${order.order_id}"></h2>
+            <p class="ordre-info"
+               th:text="${#temporals.format(order.orderdate, 'dd-MM-yyyy HH:mm')} + ' · ' + ${order.status} + ' · ' + ${order.totalPrice} + ' kr.'"></p>
+            <ul class="ordre-linjer">
+                <li th:each="line : ${order.orderlines}"
+                    th:text="${line.amount} + ' × ' + ${line.bottomName} + ' + ' + ${line.toppingName} + ' (' + ${line.price} + ' kr.)'"></li>
+            </ul>
+            <div class="ordre-footer">
+                <span class="ordre-status" th:if="${order.status.name() == 'unpaid'}" th:text="${'Du har ikke betalt denne ordre'}"></span>
+                <span class="ordre-status" th:if="${order.status.name() != 'unpaid'}" th:text="${order.status}" ></span>
+                <form th:if="${order.status.name() == 'unpaid'}" action="/betal" method="post" class="betal-form">
+                    <input type="hidden" name="order_id" th:value="${order.order_id}">
+                    <button type="submit" class="betal-btn">Betal nu</button>
+                </form>
+                <form th:if="${order.status.name() == 'unpaid'}" action="/deleteorder" method="post" class="betal-form">
+                    <input type="hidden" name="order_id" th:value="${order.order_id}">
+                    <button type="submit" class="betal-btn">Slet ordre</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="bottombar">Olsker Cupcakes · Olsker, Bornholm</footer>
 
 </body>
 </html>
