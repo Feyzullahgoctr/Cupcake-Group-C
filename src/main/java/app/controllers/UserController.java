@@ -3,6 +3,7 @@ package app.controllers;
 import app.entities.User;
 import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
+import app.services.BestilService;
 import app.services.UserService;
 import io.javalin.Javalin;
 import io.javalin.config.JavalinConfig;
@@ -15,10 +16,12 @@ import java.util.Map;
 public class UserController {
     private ConnectionPool connectionPool;
     private UserService userService;
+    private BestilService bestilService;
 
     public UserController(ConnectionPool connectionPool){
         this.connectionPool = connectionPool;
         this.userService = new UserService(connectionPool);
+        this.bestilService = new BestilService(connectionPool);
     }
 
     public void setRoutes(JavalinConfig app) {
@@ -30,13 +33,9 @@ public class UserController {
         app.routes.get("/register", ctx -> ctx.render("register"));
         app.routes.post("/register", ctx -> register(ctx));
 
-        app.routes.get("/", ctx -> {
-            Map<String, Object> model = new HashMap<>();
-            User user = ctx.sessionAttribute("user");
-            model.put("user", user);
-            ctx.render("/index", model);
-        });
+        app.routes.get("/", ctx -> showMainPage(ctx));
 
+        app.routes.get("/orderoverview", ctx -> orderOverview(ctx));
 
 
     }
@@ -110,7 +109,23 @@ public class UserController {
         } catch (DatabaseException e) {
             showLoginError(ctx, e.getMessage(), user.getEmail());
         }
-
-
     }
+    private void orderOverview(Context ctx){
+        Map<String, Object> model = new HashMap<>();
+        User user = ctx.sessionAttribute("user");
+        model.put("user", user);
+        try {
+            model.put("orders", bestilService.getOrderOverviewByUserId(user.getUser_id()));
+            ctx.render("/orderoverview.html", model);
+        } catch (DatabaseException e) {
+            ctx.result(e.getMessage());
+        }
+    }
+    private void showMainPage(Context ctx){
+        Map<String, Object> model = new HashMap<>();
+        User user = ctx.sessionAttribute("user");
+        model.put("user", user);
+        ctx.render("/index", model);
+    }
+
 }
