@@ -58,6 +58,7 @@ public class AdminMapper {
         return orders;
     }
 
+
     public List<OrderlineDTO> getOrderLines(int orderId) throws DatabaseException {
         List<OrderlineDTO> orderlines = new ArrayList<>();
         String query = """
@@ -77,6 +78,7 @@ public class AdminMapper {
                 while (rs.next()) {
                     orderlines.add(new OrderlineDTO(
                             rs.getInt("orderline_id"),
+                            rs.getInt("order_id"),
                             rs.getInt("bottom_id"),
                             rs.getInt("topping_id"),
                             rs.getInt("amount"),
