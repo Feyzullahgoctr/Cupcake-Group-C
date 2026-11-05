@@ -1,0 +1,96 @@
+/* Betaling gennemført */
+
+.betalingside {
+    position: relative;
+    min-height: 520px;
+    padding: 40px 35px 40px 280px; /* plads til cupcaken til venstre */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fbf7fc;
+    color: #402052;
+    font-family: 'Nunito', Arial, sans-serif;
+}
+
+/* Cupcake til venstre */
+.betalingside .logo {
+    position: absolute;
+    left: 0;
+    bottom: 12%;
+    height: 70%;
+}
+
+.betalingside .logo img {
+    display: block;
+    height: 100%;
+    width: auto;
+}
+
+.betalingside .betalingcomplete form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    text-align: center;
+}
+
+/* Grønt flueben over overskriften */
+.betalingside .betalingcomplete img {
+    display: block;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 2px;
+}
+
+.betalingside .betalingcomplete p {
+    margin: 0;
+    font-family: 'Fredoka', 'Nunito', Arial, sans-serif;
+    font-size: clamp(36px, 6vw, 72px);
+    font-weight: 700;
+    line-height: 1.1;
+    color: #4a1f66;
+}
+
+.betalingside .betalingcomplete span {
+    font-size: clamp(20px, 3.4vw, 40px);
+    font-weight: 500;
+    color: #4a1f66;
+}
+
+.betalingside .betalingcomplete button {
+    margin-top: 18px;
+    padding: 14px 56px;
+    border: none;
+    border-radius: 8px;
+    background-color: #b32778;
+    color: #ffffff;
+    font-family: 'Nunito', Arial, sans-serif;
+    font-size: clamp(18px, 2.8vw, 32px);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.betalingside .betalingcomplete button:hover {
+    background-color: #9a1f67;
+}
+
+body:has(.betalingside) {
+    background-color: #fbf7fc;
+}
+
+/* Mobil og smal skærm: cupcaken flytter ned under teksten */
+@media (max-width: 800px) {
+    .betalingside {
+        padding: 32px 20px 260px;
+    }
+
+    .betalingside .logo {
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%);
+        height: 230px;
+    }
+}

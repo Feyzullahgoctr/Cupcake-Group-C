@@ -4,6 +4,7 @@ package app.dto;
 public class OrderlineDTO {
 
     private int orderline_id;
+    private int order_id;
     private int bottom_id;
     private int topping_id;
     private int amount;
@@ -11,8 +12,9 @@ public class OrderlineDTO {
     private String bottomName;
     private String toppingName;
 
-    public OrderlineDTO(int orderline_id, int bottom_id, int topping_id, int amount, double price, String bottomName, String toppingName) {
+    public OrderlineDTO(int orderline_id, int order_id, int bottom_id, int topping_id, int amount, double price, String bottomName, String toppingName) {
         this.orderline_id = orderline_id;
+        this.order_id = order_id;
         this.bottom_id = bottom_id;
         this.topping_id = topping_id;
         this.amount = amount;
@@ -47,5 +49,9 @@ public class OrderlineDTO {
 
     public int getTopping_id() {
         return topping_id;
+    }
+
+    public int getOrder_id() {
+        return order_id;
     }
 }

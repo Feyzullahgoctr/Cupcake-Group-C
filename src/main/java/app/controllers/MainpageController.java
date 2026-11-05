@@ -14,7 +14,7 @@ public class MainpageController {
 
     public void setRoutes(JavalinConfig config) {
         config.routes.get("/", ctx -> ctx.render("index.html"));
-        config.routes.get("/bestil", ctx -> ctx.render("/bestil.html"));
+        config.routes.get("/bestil", ctx -> ctx.render("/bestilling.html"));
     }
 
 

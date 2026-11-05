@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Betal</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/betaling.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="background">
+
+<nav class="navbar">
+    <div class="nav-left">
+        <div class="brand">
+            <span class="brand-name">OLSKER CUPCAKES</span>
+            <span class="brand-sub">MUMS FILIBABA</span>
+        </div>
+        <a href="/" class="nav-link active">Forside</a>
+        <a href="/bestil" class="nav-link">Bestil</a>
+    </div>
+
+    <div class="nav-right">
+
+        <span class="nav-email" id="email" th:text="${user!=null ? user.email : 'Guest'}">Guest</span>
+
+        <div class="saldo-dropdown" th:if="${user != null}">
+
+            <span class="nav-saldo">Saldo: <span th:text="${user.balance}">0</span> kr</span>
+            <div class="saldo-popup">
+                <form action="/updateBalance" method="POST">
+                    <button type="submit" class="saldo-btn" value="50" name="updateBalanceForm">Tilføj 50 kr</button>
+                    <button type="submit" class="saldo-btn" value="100" name="updateBalanceForm">Tilføj 100 kr</button>
+                    <button type="submit" class="saldo-btn" value="250" name="updateBalanceForm" >Tilføj 250 kr</button>
+                    <button type="submit" class="saldo-btn" value="0" name="updateBalanceForm">Fjern alle penge</button>
+                </form>
+            </div>
+        </div>
+
+
+        <a href="/admin" class="nav-link" id="admin" th:if="${user != null && user.isAdmin()}">Admin</a>
+
+        <a href="/bestil" class="nav-link" th:if="${user != null}">Kurv</a>
+
+        <a href="/login" class="nav-link" th:if="${user == null}">Log ind</a>
+
+
+        <a href="/logout" class="nav-link" th:if="${user !=null}">Log ud</a>
+    </div>
+</nav>
+
+<!--BODY -->
+<main class="main">
+    <div class="betalindhold">
+        <img src="/images/betal-ikon.svg" alt="">
+        <h3>Er du sikker ?</h3>
+        <p>Vil du virkelig betale din ordre ?</p>
+
+        <div class="inhold">
+            <div class="ordre">
+                <p>Din ordre:</p>
+                <span th:each="item : ${orderItems}"
+                      th:text="${item.amount + ' x ' + item.bottomName + ' + ' + item.toppingName}">
+
+                    1 x Cupcake
+                </span>
+            </div>
+            <div class="price">
+                <strong>Total</strong>
+                <strong th:text="${totalPrice + ' kr'}">40 kr</strong>
+            </div>
+        </div>
+
+        <div class="knapper">
+            <a href="/bestil" class="annuller">Annuller</a>
+            <form action="/betal/bekraeft" method="post">
+                <input type="hidden" name="order_id" th:value="${order_id}">
+                <button type="submit" class="bekraeft">Ja, betal nu</button>
+            </form>
+        </div>
+    </div>
+</main>
+
+<!--BODY -->
+
+
+<footer class="bottombar"> Olsker Cupcakes * Olsker, Bornholm </footer>
+
+
+<script> function logbutton(){
+    if (document.getElementById("email").value !==null) {
+        document.getElementById("logbutton").href = "/logout";
+        document.getElementById("logbutton").innerHTML = "Log ud";
+    } else {
+        document.getElementById("logbutton").href = "/login";
+        document.getElementById("logbutton").innerHTML = "Log ind";
+    }
+
+}
+
+
+
+</script>
+
+<script src="/js/bestil.js"></script>
+
+</body>
+</html>
