@@ -37,7 +37,7 @@ public class UserController {
 
         app.routes.get("/orderoverview", ctx -> orderOverview(ctx));
 
-
+        app.routes.post("/deleteorder", ctx -> deleteOrder(ctx));
     }
 
     private void login(@NotNull Context ctx) {
@@ -126,6 +126,12 @@ public class UserController {
         User user = ctx.sessionAttribute("user");
         model.put("user", user);
         ctx.render("/index", model);
+    }
+    public void deleteOrder(Context ctx) throws DatabaseException {
+        int order_id = Integer.parseInt(ctx.formParam("order_id"));
+        bestilService.deleteOrderlines(order_id);
+        bestilService.deleteOrder(order_id);
+        ctx.redirect("/orderoverview");
     }
 
 }
