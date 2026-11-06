@@ -7,20 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UserMapperTest {
-
-    private static final String USER = "postgres";
-    private static final String PASSWORD = "postgres";
-    private static final String URL = "jdbc:postgresql://localhost:5432/%s?currentSchema=public";
-    private static final String DB = "cupcake";
-    private static final ConnectionPool connectionPool = ConnectionPool.getInstance(USER, PASSWORD, URL, DB);
-
-    private static UserMapper userMapper;
-
-    @BeforeAll
-    static void setUp(){
-        userMapper = new UserMapper(connectionPool);
-    }
+class UserMapperTest extends DatabaseTestBefore {
 
     @Test
     void login_correctEmailAndPassword_returnUser() throws DatabaseException {
