@@ -29,7 +29,7 @@
     <p class="intro">Alle ordrer i systemet, nyeste først.</p>
     <!-- Vises kun hvis der ingen ordrer er -->
     <p class="intro" th:if="${orders.isEmpty()}">Der er ingen ordrer endnu.</p>
-    <!-- AC 1: alle ordrer. AC 2: kunde, ordrelinjer, samlet pris og status -->
+    <!-- alle ordrer. kunde, ordrelinjer, samlet pris og status -->
     <table class="tabel" th:unless="${orders.isEmpty()}">
         <thead>
         <tr>
@@ -39,6 +39,7 @@
             <th>Indhold</th>
             <th>Status</th>
             <th class="hoejre">Pris</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -54,7 +55,15 @@
     </td>
     <td><span th:class="'status ' + ${order.status}" th:text="${order.status}"></span></td>
     <td class="hoejre" th:text="${#numbers.formatInteger(order.totalPrice, 1)} + ' kr'"></td>
+    <td class="hoejre">
+        <form action="/admin/ordrer/slet" method="post"
+              onsubmit="return confirm('Er du sikker på, at du vil slette ordren?')">
+            <input type="hidden" name="order_id" th:value="${order.order_id}">
+            <button type="submit" class="lille-knap">Slet</button>
+        </form>
+    </td>
 </tr>
+
         </tbody>
     </table>
 </main>

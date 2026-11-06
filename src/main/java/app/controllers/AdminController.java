@@ -5,6 +5,7 @@ import app.entities.User;
 import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
 import app.services.AdminService;
+import app.services.BestilService;
 import app.services.UserService;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.Context;
@@ -18,10 +19,12 @@ public class AdminController {
 
     private ConnectionPool connectionPool;
     private AdminService adminService;
+    private BestilService bestilService;
 
     public AdminController(ConnectionPool connectionPool){
         this.connectionPool = connectionPool;
         this.adminService = new AdminService(connectionPool);
+        this.bestilService = new BestilService(connectionPool);
     }
 
     public void setRoutes(JavalinConfig app){
@@ -30,6 +33,23 @@ public class AdminController {
 
         app.routes.get("/admin", ctx -> ctx.redirect("/admin/ordrer"));
         app.routes.get("/admin/ordrer", ctx -> showOrders(ctx));
+
+        app.routes.post("/admin/ordrer/slet", ctx -> deleteOrder(ctx)); 
+    }
+
+    private void deleteOrder(@NotNull Context ctx) throws DatabaseException {
+        if (!isAdmin(ctx)) {
+            ctx.redirect("/login");
+            return;
+        }
+        try {
+            int orderId = Integer.parseInt(ctx.formParam("order_id"));
+            bestilService.deleteOrderlines(orderId);
+            bestilService.deleteOrder(orderId);
+            ctx.redirect("/admin/ordrer");
+        } catch (DatabaseException e){
+            ctx.result(e.getMessage());
+        }
     }
 
     private void showOrders(@NotNull Context ctx) throws DatabaseException {

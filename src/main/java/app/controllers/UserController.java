@@ -128,6 +128,10 @@ public class UserController {
         ctx.render("/index", model);
     }
     public void deleteOrder(Context ctx) throws DatabaseException {
+        User user = ctx.sessionAttribute("user");
+        if (user == null){
+            ctx.redirect("/login"); return; 
+        }
         int order_id = Integer.parseInt(ctx.formParam("order_id"));
         bestilService.deleteOrderlines(order_id);
         bestilService.deleteOrder(order_id);
