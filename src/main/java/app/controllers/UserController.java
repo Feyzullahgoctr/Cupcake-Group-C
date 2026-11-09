@@ -61,6 +61,7 @@ public class UserController {
     }
     private void logout(Context ctx) {
         ctx.sessionAttribute("user", null);
+        ctx.sessionAttribute("order_id", null);
         ctx.redirect("/");
     }
 

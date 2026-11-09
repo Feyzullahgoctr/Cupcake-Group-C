@@ -10,6 +10,9 @@ import java.sql.Statement;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
+// Denne klasse er fælles for alle test
+// Indeholder kun definition for insert delete og osv
+
 public class DatabaseTestBefore {
 
     private static final String USER = "postgres";
@@ -33,6 +36,7 @@ public class DatabaseTestBefore {
         userMapper = new UserMapper(connectionPool);
     }
 
+    // Kører hver gang for alle test
     @BeforeEach
     void setUp() {
         try (Connection connection = connectionPool.getConnection();

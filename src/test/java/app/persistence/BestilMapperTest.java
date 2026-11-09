@@ -10,9 +10,14 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
+// Alle andre klasser arver fra dette
+// fordi vi kan tilgå nemmere mapper-klasser på den måde
+// vi har allerede defineret dem i DatabaseTestBefore
 public class BestilMapperTest extends DatabaseTestBefore {
 
-
+    // Logikken er sådan her
+    // så kan vi teste metode, vi vil
     @Test
     void getBottoms() throws DatabaseException {
         List<Bottom> bottoms = bestilMapper.getBottoms();
